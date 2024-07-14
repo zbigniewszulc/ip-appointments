@@ -13,6 +13,7 @@ class Patient(models.Model):
     address_line2 = models.CharField(max_length=100)
     address_line3 = models.CharField(max_length=100, blank=True)
     phone_number = models.CharField(max_length=15)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta: 
         # refer to a field of related model 'User' by using '__'
