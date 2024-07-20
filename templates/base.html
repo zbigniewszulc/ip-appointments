@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta tags for search engines -->
+    <meta name="description"
+        content="Specialized and comprehensive dental care. Book an appointment with us. Quality assurance guaranteed.">
+    <meta name="keywords"
+        content="dental, dental implants, appointment, booking, schedule, dental care, dental tourism, medical tourism, dentistry, Poland, Krakow">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Title -->
+    <title>Infinita Perfectio</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div id="logo-area">
+            <a href="#" aria-label="Open landing page">
+                <img src="{% static 'images/infinita-perfectio-logo.webp' %}"
+                    alt="Infinita Perfectio Logo - avigation to landing page">
+                <div id="catchword">
+                    <div id="infinita-perfectio">Infinita Perfectio</div>
+                    <div id="specialized-dentistry">Specialized Dentistry</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Navigation menu -->
+        <input type="checkbox" class="nav-toggle" id="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label" aria-label="Open website navigation menu">
+            <i class="fa-sharp fa-solid fa-bars"></i>
+        </label>
+        <nav>
+            <ul id="nav-wrapper">
+                <li>
+                    <a href="#" aria-label="Open my details page">My details</a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Open my appointments page">My appointments</a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Open register page">Register</a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Log in link">Log in</a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Log off link">Log off</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock content %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <ul id="footer-wrapper">
+            <li>
+                <a href="https://www.facebook.com/StomatologiaSpecjalistycznaPawelZimny/" target="_blank" rel="noopener"
+                    aria-label="Visit our Facebook page (opens in a new tab)">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://wa.me/+353860739220" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+                    <i class="fa-brands fa-whatsapp fa-shake"></i>
+                </a>
+            </li>
+            <li>
+                <a href="" aria-label="Opening hours link">Opening hours</a>
+            </li>
+        </ul>
+    </footer>
+
+    <!-- Font Awesome Kit -->
+    <script src="https://kit.fontawesome.com/a19af9adce.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
