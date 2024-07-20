@@ -44,6 +44,7 @@
         </label>
         <nav>
             <ul id="nav-wrapper">
+                {% if user.is_authenticated %}
                 <li>
                     <a href="#" aria-label="Open my details page">My details</a>
                 </li>
@@ -51,14 +52,16 @@
                     <a href="#" aria-label="Open my appointments page">My appointments</a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Open register page">Register</a>
+                    <a href="{% url 'account_logout' %}" aria-label="Log off link">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'account_login' %}" aria-label="Log in link">Login</a>
                 </li>
                 <li>
-                    <a href="#" aria-label="Log in link">Log in</a>
+                    <a href="{% url 'account_signup' %}" aria-label="Open register page">Register</a>
                 </li>
-                <li>
-                    <a href="#" aria-label="Log off link">Log off</a>
-                </li>
+                {% endif %}
             </ul>
         </nav>
     </header>
