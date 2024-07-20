@@ -18,8 +18,8 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #000000;
     list-style-position: inside;
+    line-height: normal;
 }
-
 /* Header */
 header {
     padding: 20px 15px;
@@ -197,9 +197,8 @@ article ul {
 /* Footer */
 #footer-wrapper {
     font-family: 'Anek Latin', sans-serif;
-    margin-top: 15px;
-    padding-top: 35px;
-    padding-bottom: 45px;
+    margin: 15px 0 0;
+    padding: 35px 0 45px;
     list-style-type: none;
     display: flex;
     flex-direction: column;
