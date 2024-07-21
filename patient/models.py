@@ -9,9 +9,9 @@ class Patient(models.Model):
         related_name="patient"
     )
     date_of_birth = models.DateField()
-    address_line1 = models.CharField(max_length=100)
-    address_line2 = models.CharField(max_length=100)
-    address_line3 = models.CharField(max_length=100, blank=True)
+    address_line_1 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100)
+    address_line_3 = models.CharField(max_length=100, blank=True)
     phone_number = models.CharField(max_length=15)
     updated_on = models.DateTimeField(auto_now=True)
 

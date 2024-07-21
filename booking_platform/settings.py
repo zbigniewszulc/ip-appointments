@@ -27,7 +27,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False 
 
 ALLOWED_HOSTS = ['8000-zbigniewszu-appointment-pno9wnmrmom.ws.codeinstitute-ide.net',
                 '.herokuapp.com']
@@ -132,6 +132,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_FORMS = {'signup': 'patient.forms.PatientSignupForm'}
+ACCOUNT_EMAIL_REQUIRED = True 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

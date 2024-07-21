@@ -5,7 +5,7 @@
 * {
     padding: 0;
     margin: 0;
-    /* define how the total width/height of element is calculated */
+    /* include padding and border in an element's total width and height */
     box-sizing: border-box;
 }
 
@@ -18,8 +18,8 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #000000;
     list-style-position: inside;
+    line-height: normal;
 }
-
 /* Header */
 header {
     padding: 20px 15px;
@@ -127,10 +127,8 @@ main {
     text-decoration: none;
 }
 
-/* Landing page */
-.inner {
-    flex-basis: 50%;
-    flex-grow: 1;
+.hidden-heading {
+    display: none;
 }
 
 /* Section */
@@ -143,12 +141,51 @@ article ul {
     padding-left: 25px;
 }
 
+/* Form */
+#loginForm {
+    margin: 15px auto;
+    max-width:475px;
+}
+
+#signupForm {
+    margin: 15px auto;
+    max-width:775px;
+}
+
+#resetPassForm {
+    margin: 15px auto;
+    max-width:550px;
+}
+
+.btn-primary {
+    border: none;
+    display: block;
+    float: right;
+    padding: 10px 30px;
+    background-color: rgb(73, 135, 155);
+    box-shadow: 2px 2px 7px 1px #9e9e9e;
+    font-size: 1em;
+    margin: 20px;
+    color: white;
+    letter-spacing: .2em;
+}
+
+.btn-primary:hover {
+    box-shadow: rgba(0, 0, 0, 0.45) 2px 5px 8px;
+    transform: scale(1);
+    background-color: rgb(50, 123, 148);
+}
+
+.required {
+    font-weight: bolder;
+    color: red;
+}
+
 /* Footer */
 #footer-wrapper {
     font-family: 'Anek Latin', sans-serif;
-    margin-top: 15px;
-    padding-top: 35px;
-    padding-bottom: 45px;
+    margin: 15px 0 0;
+    padding: 35px 0 45px;
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -288,6 +325,17 @@ article ul {
     article {
         column-count: 2;
         column-gap: 80px;
+    }
+
+    /* Form */
+    #myform input[type=submit]:hover {
+        box-shadow: rgba(0, 0, 0, 0.45) 2px 5px 8px;
+        transform: scale(1);
+        background-color: rgb(50, 123, 148);
+    }
+
+    #myform input[type=submit]:active {
+        transform: scale(0.95);
     }
 
 }
