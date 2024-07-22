@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from django.contrib.messages import constants as messages
 if os.path.isfile('env.py'):
     import env
 
@@ -27,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-zbigniewszu-appointment-pno9wnmrmom.ws.codeinstitute-ide.net',
                 '.herokuapp.com']
@@ -48,7 +49,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'crispy_bootstrap5',
-    'hello_world',
     'patient',
 ]
 
@@ -158,3 +158,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Override default message tags
+MESSAGE_TAGS = {
+        messages.DEBUG: 'bg-secondary',
+        messages.INFO: 'bg-info',
+        messages.SUCCESS: 'bg-success',
+        messages.WARNING: 'bg-warning',
+        messages.ERROR: 'bg-danger',
+}

@@ -2,6 +2,7 @@ from allauth.account.forms import SignupForm
 from django import forms
 from .models import Patient
 from django.core.validators import RegexValidator
+from django.contrib import messages
 
 # Formula for number phone validation. Using built-in regex validator.
 phone_regex = RegexValidator( 
@@ -44,5 +45,5 @@ class PatientSignupForm(SignupForm):
             phone_number=self.cleaned_data['phone_number']
         )
         patient.save()
-
+        messages.success(request, 'You account has been successfully created.')
         return user

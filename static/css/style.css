@@ -181,6 +181,23 @@ article ul {
     color: red;
 }
 
+/* Toast */
+.toast-container { 
+    /* Position above the footer */ 
+    display: block;
+    position: fixed; 
+    bottom: 200px; 
+    right: 5px; 
+    max-width: 95%;
+    /* Appears above other content */ 
+    z-index: 100; 
+} 
+    
+.toast { 
+    /* Space between stacked toasts */ 
+    margin-bottom: 10px; 
+}
+
 /* Footer */
 #footer-wrapper {
     font-family: 'Anek Latin', sans-serif;
@@ -251,6 +268,12 @@ article ul {
     section {
         padding: 30px;
     }
+
+     /* Toast */   
+    .toast-container { 
+        bottom: 140px; 
+        right: 40px;
+    } 
 
     /* Footer */
     #footer-wrapper {
