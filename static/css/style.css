@@ -144,17 +144,22 @@ article ul {
 /* Form */
 #loginForm {
     margin: 15px auto;
-    max-width:475px;
+    max-width: 475px;
+}
+
+#logoutForm {
+    margin: 25px auto;
+    max-width: 270px;
 }
 
 #signupForm {
     margin: 15px auto;
-    max-width:775px;
+    max-width: 775px;
 }
 
 #resetPassForm {
     margin: 15px auto;
-    max-width:550px;
+    max-width: 550px;
 }
 
 .btn-primary {
