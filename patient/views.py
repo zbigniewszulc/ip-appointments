@@ -5,6 +5,16 @@ from .forms import PatientSignupForm
 
 # Create your views here.
 def index(request):
+    """ 
+    Display the patient signup form. 
+
+    **Context** 
+    ``patient_signup_form`` 
+    	An instance of :form:`PatientSignupForm`. 
+
+    **Template:** 
+    :template:`patient/index.html` 
+    """
     patient_signup_form = PatientSignupForm()
     
     return render( 
