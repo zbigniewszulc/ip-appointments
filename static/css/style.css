@@ -152,14 +152,19 @@ article ul {
     max-width: 270px;
 }
 
-#signupForm {
+#passwordResetDone {
     margin: 15px auto;
-    max-width: 775px;
+    max-width: 450px;
 }
 
 #resetPassForm {
     margin: 15px auto;
-    max-width: 550px;
+    max-width: 490px;
+}
+
+#signupForm {
+    margin: 15px auto;
+    max-width: 775px;
 }
 
 .btn-primary {
