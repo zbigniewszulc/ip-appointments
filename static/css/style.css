@@ -143,27 +143,32 @@ article ul {
 
 /* Form */
 #loginForm {
-    margin: 15px auto;
-    max-width: 475px;
+    margin: 20px auto;
+    max-width: 455px;
 }
 
 #logoutForm {
     margin: 25px auto;
-    max-width: 270px;
+    max-width: 290px;
 }
 
 #passwordResetDone {
     margin: 15px auto;
-    max-width: 450px;
+    max-width: 470px;
+}
+
+#passwordResetFromKey {
+    margin: 15px auto;
+    max-width: 430px;
 }
 
 #resetPassForm {
-    margin: 15px auto;
-    max-width: 490px;
+    margin:15px auto;
+    max-width: 400px;
 }
 
 #signupForm {
-    margin: 15px auto;
+    margin: 0 auto;
     max-width: 775px;
 }
 
@@ -280,7 +285,12 @@ article ul {
 
     /* Section */
     section {
-        padding: 30px;
+        padding: 15px;
+    }
+
+    /* Form */
+    #loginForm {
+        margin: 0 auto;
     }
 
      /* Toast */   
@@ -351,11 +361,6 @@ article ul {
     main {
         margin-top: 144px;
         padding: 10px 100px;
-    }
-
-    /* Section */
-    section {
-        padding: 50px;
     }
 
     /* Article */

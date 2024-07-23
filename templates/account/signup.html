@@ -5,13 +5,11 @@
 {% block head_title %}{% trans "Signup" %}{% endblock head_title %}
 
 {% block content %}
-<div class="container">
-  <div id="signupForm">
-    <h1>{% trans "Sign Up" %}</h1>
-
+<section id="signupForm">
+  <div class="container">
+    <h1>{% trans "Sign Up" %}</h1>  
     <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-    <p>(<span class="required">*</span>) Required</p>
-
+    <p>(<span class="required">*</span>) Required</p> 
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
         <div class="row">
@@ -65,5 +63,5 @@
       <button type="submit" class="btn btn-primary">{% trans "Sign Up" %} &raquo;</button>
     </form>
   </div>
-</div>
+</section>
 {% endblock content %}
