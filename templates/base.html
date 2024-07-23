@@ -131,9 +131,15 @@
     </script>
 
 <script> 
-    $(document).ready(function () { 
-        $('.toast').toast('show');
+$(document).ready(function () { 
+    // Time delay between each toast (milliseconds)
+    var delay = 2000; 
+    // Iterate over each toast 
+    $('.toast').each(function(index) { 
+        // Show each toast with a delay 
+        setTimeout(() => $(this).toast('show'), delay * index); 
     }); 
+});
 </script>
 
 </body>

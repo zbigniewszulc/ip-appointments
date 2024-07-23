@@ -3,6 +3,8 @@ from django import forms
 from .models import Patient
 from django.core.validators import RegexValidator
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Formula for number phone validation. Using built-in regex validator.
 phone_regex = RegexValidator( 
@@ -45,5 +47,22 @@ class PatientSignupForm(SignupForm):
             phone_number=self.cleaned_data['phone_number']
         )
         patient.save()
+
+        # Send email notification 
+        subject = 'Welcome to Infinita Perfectio Clinic' 
+        message = (
+            f'Dear {user.first_name},\n\nThank you for signing up.' 
+            'Your account has been successfully created.\n'   
+            f'Your username is: {user.username} \n\n'
+            'Best regards,\nInfinita Perfectio Team' 
+        )
+        from_email = settings.DEFAULT_FROM_EMAIL 
+        recipient_list = [user.email] 
+
+        send_mail(subject, message, from_email, recipient_list)
+
+        # Flash message
         messages.success(request, 'You account has been successfully created.')
+        messages.info(request, f'Confirmation email sent to {user.email}.')
+
         return user

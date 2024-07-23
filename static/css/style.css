@@ -186,6 +186,10 @@ article ul {
     color: red;
 }
 
+.bg-info {
+    background-color: #3291a4 !important;
+}
+
 /* Toast */
 .toast-container { 
     /* Position above the footer */ 
