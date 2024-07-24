@@ -52,10 +52,19 @@ INSTALLED_APPS = [
     'patient',
 ]
 
-# Allauth settings
-SITE_ID = 1
+# Django authentication system
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Enable Sites framework
+SITE_ID = 1
+
+# Allauth settings
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_FORMS = {'signup': 'patient.forms.PatientSignupForm'}
+ACCOUNT_EMAIL_REQUIRED = True 
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_EMAIL_NOTIFICATIONS = True
 
 # Crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -130,10 +139,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_FORMS = {'signup': 'patient.forms.PatientSignupForm'}
-ACCOUNT_EMAIL_REQUIRED = True 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

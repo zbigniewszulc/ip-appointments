@@ -48,21 +48,4 @@ class PatientSignupForm(SignupForm):
         )
         patient.save()
 
-        # Send email notification 
-        subject = 'Welcome to Infinita Perfectio Clinic' 
-        message = (
-            f'Dear {user.first_name},\n\nThank you for signing up.' 
-            'Your account has been successfully created.\n'   
-            f'Your username is: {user.username} \n\n'
-            'Best regards,\nInfinita Perfectio Team' 
-        )
-        from_email = settings.DEFAULT_FROM_EMAIL 
-        recipient_list = [user.email] 
-
-        send_mail(subject, message, from_email, recipient_list)
-
-        # Flash message
-        messages.success(request, 'You account has been successfully created.')
-        messages.info(request, f'Confirmation email sent to {user.email}.')
-
         return user
