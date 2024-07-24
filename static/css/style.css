@@ -200,6 +200,14 @@ article ul {
     letter-spacing: .2em;
 }
 
+.btn-primary:active,
+.btn-primary:focus, 
+.btn-primary:focus-visible {
+    background-color: rgb(74 136 156);
+    border-color: rgb(74 136 156);
+    box-shadow: none;
+}
+
 .btn-primary:hover {
     box-shadow: rgba(0, 0, 0, 0.45) 2px 5px 8px;
     transform: scale(1);

@@ -21,7 +21,7 @@ class PatientSignupForm(SignupForm):
     last_name = forms.CharField(min_length=2, max_length=150, required=True)
     date_of_birth = forms.DateField(
         required=True, 
-        widget=forms.DateInput(attrs={'type': 'date'})
+        widget=forms.DateInput(attrs={'type': 'date', 'min': '1900-01-01'})
     )
     address_line_1 = forms.CharField(min_length=2,max_length=100, required=True)
     address_line_2 = forms.CharField(min_length=2,max_length=100, required=True)
