@@ -142,19 +142,49 @@ article ul {
 }
 
 /* Form */
-#loginForm {
-    margin: 15px auto;
-    max-width:475px;
+#emailConfirm {
+    margin: 20px auto;
+    max-width: 425px;
 }
 
-#signupForm {
+#emailAddresses {
+    margin: 5px auto;
+    max-width: 800px;
+}
+
+#loginForm {
+    margin: 20px auto;
+    max-width: 455px;
+}
+
+#logoutForm {
+    margin: 25px auto;
+    max-width: 290px;
+}
+
+#passwordResetDone {
     margin: 15px auto;
-    max-width:775px;
+    max-width: 470px;
+}
+
+#passwordResetFromKey {
+    margin: 15px auto;
+    max-width: 430px;
 }
 
 #resetPassForm {
-    margin: 15px auto;
-    max-width:550px;
+    margin:15px auto;
+    max-width: 400px;
+}
+
+#signupForm {
+    margin: 0 auto;
+    max-width: 775px;
+}
+
+#veryficationSent {
+    margin: 10px auto;
+    max-width: 665px;
 }
 
 .btn-primary {
@@ -179,6 +209,27 @@ article ul {
 .required {
     font-weight: bolder;
     color: red;
+}
+
+.bg-info {
+    background-color: #3291a4 !important;
+}
+
+/* Toast */
+.toast-container { 
+    /* Position above the footer */ 
+    display: block;
+    position: fixed; 
+    bottom: 200px; 
+    right: 5px; 
+    max-width: 95%;
+    /* Appears above other content */ 
+    z-index: 100; 
+} 
+    
+.toast { 
+    /* Space between stacked toasts */ 
+    margin-bottom: 10px; 
 }
 
 /* Footer */
@@ -209,6 +260,17 @@ article ul {
     /* Whatsapp icon */
     font-size: 21px;
 }
+
+#openingHours .dropdown-menu { 
+    width: 300px; /* Adjust the width */ 
+    min-height: 100%; /* Adjust the maximum height */
+    padding: 30px;
+    box-shadow: none;
+} 
+
+#openingHours .btn:focus { 
+    box-shadow: none;
+} 
 
 /* Media query: tablets and larger (768px and up) */
 @media screen and (min-width: 768px) {
@@ -249,8 +311,19 @@ article ul {
 
     /* Section */
     section {
-        padding: 30px;
+        padding: 15px;
     }
+
+    /* Form */
+    #loginForm {
+        margin: 0 auto;
+    }
+
+     /* Toast */   
+    .toast-container { 
+        bottom: 140px; 
+        right: 40px;
+    } 
 
     /* Footer */
     #footer-wrapper {
@@ -314,11 +387,6 @@ article ul {
     main {
         margin-top: 144px;
         padding: 10px 100px;
-    }
-
-    /* Section */
-    section {
-        padding: 50px;
     }
 
     /* Article */

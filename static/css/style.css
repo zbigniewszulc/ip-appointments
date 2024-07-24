@@ -261,6 +261,17 @@ article ul {
     font-size: 21px;
 }
 
+#openingHours .dropdown-menu { 
+    width: 300px; /* Adjust the width */ 
+    min-height: 100%; /* Adjust the maximum height */
+    padding: 30px;
+    box-shadow: none;
+} 
+
+#openingHours .btn:focus { 
+    box-shadow: none;
+} 
+
 /* Media query: tablets and larger (768px and up) */
 @media screen and (min-width: 768px) {
 

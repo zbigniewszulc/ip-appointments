@@ -31,6 +31,7 @@
 
     <!-- Title -->
     <title>Infinita Perfectio</title>
+
 </head>
 
 <body>
@@ -109,9 +110,49 @@
                     <i class="fa-brands fa-whatsapp fa-shake"></i>
                 </a>
             </li>
-            <li>
-                <a href="" aria-label="Opening hours link">Opening hours</a>
+            <li> 
+                <div class="container" id="openingHours"> 
+                    <div class="btn-group dropup"> 
+                        <a href="#"class="btn btn-link fs-5 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Opening hours link">Opening Hours</a> 
+                        <ul class="dropdown-menu mb-3 shadow bg-light"> 
+                            <div class="d-flex justify-content-end mb-4">
+                                <button type="button" class="btn-close end" aria-label="Close"></button>
+                            </div>
+                            <div class="container"> 
+                                <div class="row"> 
+                                    <div class="col-6"><strong>Monday:</strong></div> 
+                                    <div class="col-6 text-end"> 10 AM - 06 PM </div> 
+                                </div> 
+                                <div class="row mt-4"> 
+                                    <div class="col-6"> <strong>Tuesday:</strong> </div> 
+                                    <div class="col-6 text-end"> 10 AM - 06 PM </div> 
+                                </div> 
+                                <div class="row mt-4"> 
+                                    <div class="col-6"> <strong>Wednesday:</strong> </div> 
+                                    <div class="col-6 text-end"> 10 AM - 06 PM</div> 
+                                </div> 
+                                <div class="row mt-4"> 
+                                    <div class="col-6"> <strong>Thursday:</strong> </div> 
+                                    <div class="col-6 text-end">10 AM - 06 PM </div> 
+                                </div> 
+                                <div class="row mt-4"> 
+                                    <div class="col-6"> <strong>Friday:</strong> </div> 
+                                    <div class="col-6 text-end"> 10 AM - 06 PM </div> 
+                                </div> 
+                                <div class="row mt-4"> 
+                                    <div class="col-6"> <strong>Saturday:</strong> </div> 
+                                    <div class="col-6 text-end"> Closed </div> 
+                                </div> 
+                                <div class="row mt-4"> 
+                                    <div class="col-6"> <strong>Sunday:</strong> </div> 
+                                    <div class="col-6 text-end"> Closed </div> 
+                                </div> 
+                            </div> 
+                        </ul> 
+                    </div> 
+                </div> 
             </li>
+            
         </ul>
     </footer>
 
@@ -138,6 +179,15 @@ $(document).ready(function () {
     $('.toast').each(function(index) { 
         // Show each toast with a delay 
         setTimeout(() => $(this).toast('show'), delay * index); 
+    }); 
+
+    // still required - according to documentation
+    $('[data-bs-toggle="popover"]').popover(); 
+    $('#openingHours').on('click', function(e) {
+        // Prevent default action
+        e.preventDefault();
+
+        $(this).popover('toggle');
     }); 
 });
 </script>
