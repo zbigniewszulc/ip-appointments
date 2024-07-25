@@ -28,7 +28,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False    
 
 ALLOWED_HOSTS = ['8000-zbigniewszu-appointment-pno9wnmrmom.ws.codeinstitute-ide.net',
                 '.herokuapp.com']
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'patient',
+    'appointment',
 ]
 
 # Django authentication system
