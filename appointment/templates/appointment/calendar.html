@@ -17,6 +17,12 @@
         </div>
     </div>
 
+    {% if not user.is_authenticated %}
+    <div class="alert alert-warning text-center" role="alert">
+        You need to be looged in to use our booking system. Please <a href="{% url 'account_signup' %}" class="alert-link">Register</a> or <a href="{% url 'account_login' %}" class="alert-link">Login</a> if you have your account with us.
+      </div>
+    {% endif %}
+
     <div class="calendar">
         <div class="row">
             {% for day in week_data %}
@@ -29,10 +35,18 @@
                         {{ day.date|date:"D" }} 
                     </span>
                 </div>
-                <ul class="time-slots">
+                <ul class="time-slots list-unstyled">
                     {% for slot in day.slots %}
-                    <li class="{% if slot.booked or day.is_weekend %} booked {% else %} available {% endif %}">
-                        {{ slot.time }}
+                    <li>
+                        <form action="{% url 'book_appointment' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="date" value="{{ day.date }}">
+                            <input type="hidden" name="time" value="{{ slot.time }}">
+                            <button type="submit" class="btn {% if slot.booked or day.is_weekend %} btn-secondary {% else %} btn-primary {% endif %}" 
+                                    {% if slot.booked or day.is_weekend or not user.is_authenticated %} disabled {% endif %}>
+                                {{ slot.time }}
+                            </button>
+                        </form>
                     </li>
                     {% endfor %}
                 </ul>
