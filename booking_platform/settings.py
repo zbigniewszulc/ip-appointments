@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'crispy_bootstrap5',
-    'patient',
     'appointment',
+    'patient',
 ]
 
 # Django authentication system
@@ -172,6 +172,25 @@ MESSAGE_TAGS = {
         messages.SUCCESS: 'bg-success',
         messages.WARNING: 'bg-warning',
         messages.ERROR: 'bg-danger',
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {"class": "logging.StreamHandler"},
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "logs/platform.log",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+        },
+    }
 }
 
 # Sendgrid settings

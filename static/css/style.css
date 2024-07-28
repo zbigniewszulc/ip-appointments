@@ -141,7 +141,71 @@ article ul {
     padding-left: 25px;
 }
 
+#strapLine {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+#strapLine .col {
+    /* Center column takes up remaing space */
+    flex: 1;
+    text-align: center;
+}
+
+#strapLine .btn-primary {
+    padding: 10px 20px;
+}
+
 /* Form */
+
+.calendar { 
+    margin: 20px 0; 
+} 
+
+.calendar-day { 
+    border: 1px solid #ddd; padding: 10px; 
+} 
+
+.day-number { 
+    font-weight: bold; 
+}
+
+.today { 
+    background-color: #ffe100;
+    border-radius: 50%;
+    padding: 8px;
+} 
+
+.time-slots { 
+    list-style: 
+    none; padding: 0; 
+} 
+.time-slots li { 
+    margin: 20px 0; 
+    padding: 10px 7px; 
+    border-radius: 3px; 
+} 
+.available { 
+    background-color: rgb(115 169 187);
+    cursor: pointer; 
+    color: white;
+} 
+.available:hover { 
+    background-color: rgb(96, 144, 160);
+    color: white; 
+} 
+.booked { 
+    background-color: #e6e6e6; 
+    color: #e6e6e6; 
+}
+
+#calendarStrapline {
+    display: flex;
+    flex-direction: row;
+}
+
 #emailConfirm {
     margin: 20px auto;
     max-width: 425px;
@@ -280,6 +344,13 @@ article ul {
     box-shadow: none;
 } 
 
+/* Media query: (497px and up) */
+@media screen and (min-width: 497px) {
+    #strapLine {
+        flex-direction: row;
+    }
+} 
+
 /* Media query: tablets and larger (768px and up) */
 @media screen and (min-width: 768px) {
 
@@ -326,6 +397,11 @@ article ul {
     #loginForm {
         margin: 0 auto;
     }
+
+    .time-slots li { 
+        margin: 5px 0; 
+        padding: 6px 5px; 
+    } 
 
      /* Toast */   
     .toast-container { 
