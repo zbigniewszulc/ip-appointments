@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False    
 
 ALLOWED_HOSTS = ['8000-zbigniewszu-appointment-pno9wnmrmom.ws.codeinstitute-ide.net',
-                '.herokuapp.com']
+                '.herokuapp.com', 
+                'localhost']
 
 
 # Application definition
@@ -179,14 +180,14 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
         },
     },
 }
