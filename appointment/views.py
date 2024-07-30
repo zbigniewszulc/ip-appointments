@@ -1,7 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
+from patient.models import Patient
+from .forms import BookAppointmentForm
 from .models import Appointment
+from django.urls import reverse 
+from django.http import HttpResponseRedirect
 import logging
 logger = logging.getLogger('django')
 
@@ -244,3 +249,65 @@ def calendar_view(request, year=None, month=None, day=None):
     }
 
     return render(request, 'appointment/calendar.html', context)
+
+@login_required
+def book_appointment(request):
+    """
+    Handles the booking of an appointment for logged-in user.
+    Validates the form data, checks slot availability, and handles booking. 
+    Redirects to the calendar view for the specified date 
+    or shows error messages.
+
+    Args:
+        request (HttpRequest): The HTTP request object containing form data.
+
+    Returns:
+        HttpResponse: Redirects to the updated calendar view or shows error msg.
+    """
+    if request.method == "POST":
+        form = BookAppointmentForm(data=request.POST)
+
+        if form.is_valid():
+            date = form.cleaned_data['date']
+            time_slot = form.cleaned_data['time_slot']
+            service = form.cleaned_data['service']
+
+            try:
+                patient = Patient.objects.get(user=request.user)
+            except Patient.DoesNotExist:
+                messages.error(
+                    request,
+                    "We could not find your username session." +
+                    "Make sure you are logged in"
+                )
+                return redirect('calendar_view')
+
+            # Check if the slot is already booked to avoid double booking
+            appointment = Appointment.objects.filter(
+                date=date, time_slot=time_slot
+            )
+            if appointment.exists():
+                messages.error(request, "Sorry, this slot is already booked.")
+            else:
+                # Create a new appointment with the logged-in user
+                appointment = Appointment(
+                    patient=patient,
+                    service=service,
+                    date=date,
+                    time_slot=time_slot
+                )
+                appointment.save()
+                messages.success(request, "Appointment booked successfully.")
+        else:
+            messages.error(request, "Error: Invalid form data.")
+
+    # Extract year, month, and day from the 'date' form field..
+    # ..to establish redirection 
+    year = date.year 
+    month = date.month 
+    day = date.day
+
+    # Redirect to calendar view with the date established above 
+    return HttpResponseRedirect(
+        reverse('calendar_view', args=[year, month, day])
+    )

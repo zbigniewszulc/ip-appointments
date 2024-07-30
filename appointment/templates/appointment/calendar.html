@@ -40,8 +40,9 @@
                     <li>
                         <form action="{% url 'book_appointment' %}" method="post">
                             {% csrf_token %}
-                            <input type="hidden" name="date" value="{{ day.date }}">
-                            <input type="hidden" name="time" value="{{ slot.time }}">
+                            <input type="hidden" name="date" value="{{ day.date|date:'Y-m-d' }}">
+                            <input type="hidden" name="time_slot" value="{{ slot.time }}">
+                            <input type="hidden" name="service" value="1">
                             <button type="submit" class="btn {% if slot.booked or day.is_weekend %} btn-secondary {% else %} btn-primary {% endif %}" 
                                     {% if slot.booked or day.is_weekend or not user.is_authenticated %} disabled {% endif %}>
                                 {{ slot.time }}
