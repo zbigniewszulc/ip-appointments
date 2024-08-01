@@ -1,70 +1,68 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="row mb-4 align-items-center" id="strapLine">
-        <div class="col-auto">
-            <!-- Previous Week Button -->
-            <a href="{% url 'calendar_view' prev_year prev_month prev_day %}" class="btn btn-primary">&larr;</a>
-        </div>
-        <div class="col text-center">
-            <!-- Current Week Display -->
-            <h2>Appointments for {{ current_week }}</h2>
-        </div>
-        <div class="col-auto">
-            <!-- Next Week Button -->
-            <a href="{% url 'calendar_view' next_year next_month next_day %}" class="btn btn-primary">&rarr;</a>
-        </div>
-    </div>
-
-    {% if not user.is_authenticated %}
-    <div class="alert alert-warning text-center" role="alert">
-        You need to be looged in to use our booking system. Please <a href="{% url 'account_signup' %}" class="alert-link">Register</a> or <a href="{% url 'account_login' %}" class="alert-link">Login</a> if you have your account with us.
-      </div>
-    {% endif %}
-
-    <div class="calendar">
-        <div class="row">
-            {% for day in week_data %}
-            <div class="col calendar-day">
-                <div class="day-number">
-                    <span class="{% if day.date == today %} today {% endif %}">
-                        {{ day.date.day }}
-                    </span>
-                    <span> 
-                        {{ day.date|date:"D" }} 
-                    </span>
-                </div>
-                <ul class="time-slots list-unstyled">
-                    {% for slot in day.slots %}
-                    <li>
-                        <form action="{% url 'book_appointment' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="date" value="{{ day.date|date:'Y-m-d' }}">
-                            <input type="hidden" name="time_slot" value="{{ slot.time }}">
-                            <input type="hidden" name="service" value="1">
-                            <button type="submit" class="btn {% if slot.booked or day.is_weekend %} btn-secondary {% else %} btn-primary {% endif %}" 
-                                    {% if slot.booked or day.is_weekend or not user.is_authenticated %} disabled {% endif %}>
-                                {{ slot.time }}
-                            </button>
-                        </form>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- Button to go to the Current Week -->
-    {% if show_current_week_button %}
+<section>
     <div class="container">
-        <div class="row mt-4">
+        <div class="row mb-4 align-items-center" id="strapLine">
+            <div class="col-auto">
+                <!-- Previous Week Button -->
+                <a href="{% url 'calendar_view' prev_year prev_month prev_day %}" class="btn btn-primary"><i class="fa-solid fa-angles-left"></i></a>
+            </div>
             <div class="col text-center">
-                <a href="{% url 'calendar_view' today.year today.month today.day %}" class="btn btn-link">Current Week</a>
+                <!-- Current Week Display -->
+                <h2>Appointments for {{ current_week }}</h2>
+            </div>
+            {% if show_current_week_button %}
+            <div class="col-auto">
+                <!-- Current Week Button -->
+                <a href="{% url 'calendar_view' today.year today.month today.day %}" class="btn btn-primary" ><i class="fa-solid fa-arrows-to-circle"></i></i></a>
+            </div>
+            {% endif %}
+            <div class="col-auto">
+                <!-- Next Week Button -->
+                <a href="{% url 'calendar_view' next_year next_month next_day %}" class="btn btn-primary"><i class="fa-solid fa-angles-right"></i></a>
             </div>
         </div>
+
+        {% if not user.is_authenticated %}
+        <div class="alert alert-secondary text-center" role="alert">
+            To use our booking system, please <a href="{% url 'account_login' %}" class="alert-link">Login</a> or <a href="{% url 'account_signup' %}" class="alert-link">Register</a> for an account.
+          </div>
+        {% endif %}
+
+        <div class="calendar">
+            <div class="row">
+                {% for day in week_data %}
+                <div class="col calendar-day">
+                    <div class="day-number">
+                        <span class="{% if day.date == today %} today {% endif %}">
+                            &nbsp; {{ day.date.day }}
+                        </span>
+                        <span> 
+                            &nbsp;  {{ day.date|date:"D" }} 
+                        </span>
+                    </div>
+                    <ul class="time-slots list-unstyled row">
+                        {% for slot in day.slots %}
+                        <li class="col">
+                            <form action="{% url 'book_appointment' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="date" value="{{ day.date|date:'Y-m-d' }}">
+                                <input type="hidden" name="time_slot" value="{{ slot.time }}">
+                                <input type="hidden" name="service" value="1">
+                                <button type="submit" class="btn {% if slot.booked or day.is_weekend %} btn-secondary {% else %} btn-primary {% endif %}" 
+                                        {% if slot.booked or day.is_weekend or not user.is_authenticated %} disabled {% endif %}>
+                                    {{ slot.time }}
+                                </button>
+                            </form>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
-    {% endif %}
-</div>
+</section>
 {% endblock %}

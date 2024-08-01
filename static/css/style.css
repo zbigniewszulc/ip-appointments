@@ -141,6 +141,7 @@ article ul {
     padding-left: 25px;
 }
 
+/* Strapline */
 #strapLine {
     display: flex;
     justify-content: space-between;
@@ -155,7 +156,9 @@ article ul {
 }
 
 #strapLine .btn-primary {
-    padding: 10px 20px;
+    padding: 8px 25px;
+    border-radius: 0;
+    margin-bottom: 25px;
 }
 
 /* Form */
@@ -170,12 +173,17 @@ article ul {
 
 .day-number { 
     font-weight: bold; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .today { 
     background-color: #ffe100;
     border-radius: 50%;
-    padding: 8px;
+    width: 30px; 
+    height: 30px; 
+    text-align: center;
 } 
 
 .time-slots { 
@@ -251,17 +259,19 @@ article ul {
     max-width: 665px;
 }
 
-.btn-primary {
+.btn {
     border: none;
     display: block;
-    float: right;
-    padding: 10px 30px;
+    padding: 5px 30px;
+    font-size: 1.1rem;
+    margin: 5px auto;
+    min-width: 90%;
+}
+
+.btn-primary, .btn-primary:disabled {
     background-color: rgb(73, 135, 155);
     box-shadow: 2px 2px 7px 1px #9e9e9e;
-    font-size: 1em;
-    margin: 20px;
     color: white;
-    letter-spacing: .2em;
 }
 
 .btn-primary:active,
@@ -345,7 +355,7 @@ article ul {
 } 
 
 /* Media query: (497px and up) */
-@media screen and (min-width: 497px) {
+@media screen and (min-width: 560px) {
     #strapLine {
         flex-direction: row;
     }
