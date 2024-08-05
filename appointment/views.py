@@ -53,19 +53,16 @@ def generate_week_calendar(start_date):
     week = [start_date + timedelta(days=i) for i in range(7)]
     return week
 
-def get_time_slots(date):
+def get_time_slots():
     """ 
-    Generate a list of hourly time slots for a given date.
-
-    Args:
-        date (datetime.date): The date for which to generate time slots. 
+    Generate a list of hourly time slots.
 
     Returns:
         list of str: A list of time slots in the format 'HH:MM' 
             from 10:00 to 17:00.
 
     Notes:
-        - `strptime` string parse time 
+        - `strptime` string parse time - convert string into 'datetime' object
         - `%H:%M` represents hours and minutes
         - `start_time` sample is an object (e.g. 2024-07-27 10:00:00)
         - `delta` object representing duration of 1 hour
@@ -136,7 +133,7 @@ def get_week_calendar_with_slots(start_date):
     week_with_slots = []
     for day in week_days:
         date = day
-        time_slots = get_time_slots(date)
+        time_slots = get_time_slots()
         booked_slots = get_booked_slots(date)
         slots_with_booking_info = []
         # Create dictionary representing a time slot with its booking status
