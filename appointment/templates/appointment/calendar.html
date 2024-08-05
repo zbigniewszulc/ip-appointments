@@ -6,7 +6,7 @@
         <div class="row mb-4 align-items-center" id="strapLine">
             <div class="col-auto">
                 <!-- Previous Week Button -->
-                <a href="{% url 'calendar_view' prev_year prev_month prev_day %}" class="btn btn-primary"><i class="fa-solid fa-angles-left"></i></a>
+                <a href="{% url 'calendar_view' prev_year prev_month prev_day %}" class="btn btn-primary" data-bs-toggle="tooltip" title="Go to previous week"><i class="fa-solid fa-angles-left"></i></a>
             </div>
             <div class="col text-center">
                 <!-- Current Week Display -->
@@ -15,12 +15,12 @@
             {% if show_current_week_button %}
             <div class="col-auto">
                 <!-- Current Week Button -->
-                <a href="{% url 'calendar_view' today.year today.month today.day %}" class="btn btn-primary" ><i class="fa-solid fa-arrows-to-circle"></i></i></a>
+                <a href="{% url 'calendar_view' today.year today.month today.day %}" class="btn btn-primary" data-bs-toggle="tooltip" title="Go to current week"><i class="fa-solid fa-arrows-to-circle"></i></i></a>
             </div>
             {% endif %}
             <div class="col-auto">
                 <!-- Next Week Button -->
-                <a href="{% url 'calendar_view' next_year next_month next_day %}" class="btn btn-primary"><i class="fa-solid fa-angles-right"></i></a>
+                <a href="{% url 'calendar_view' next_year next_month next_day %}" class="btn btn-primary" data-bs-toggle="tooltip" title="Go to next week"><i class="fa-solid fa-angles-right"></i></a>
             </div>
         </div>
 
