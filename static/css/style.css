@@ -314,6 +314,10 @@ article ul {
     margin-bottom: 10px; 
 }
 
+.toast-container .bg-warning {
+    background-color: #fb6711 !important;
+}
+
 /* Footer */
 #footer-wrapper {
     font-family: 'Anek Latin', sans-serif;

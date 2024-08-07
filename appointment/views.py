@@ -159,7 +159,7 @@ def calendar_view(request, year=None, month=None, day=None):
     Render a calendar view for provided week starting on Sunday.
 
     Calculates the start date of the week based on the provided 
-    year, month, and day, or defaults to today's date. Then, it generates a 
+    year(2000 onward), month, and day, or defaults to today's date. Then, it generates a 
     weekly calendar with time slots and booking information, and renders a 
     template with this data.
 
@@ -204,14 +204,18 @@ def calendar_view(request, year=None, month=None, day=None):
 
     # Validate input date, in case if user typed in URL manually
     if year and month and day:
-        try:
-            start_date = datetime(year, month, day).date()
-        except ValueError:
-            messages.error(
-                request, 
-                "Invalid date provided. Redirecting to current week.."
-            )
+        if year < 2000:
+            messages.warning(request, "Year must be 2000 or later")
             return redirect('calendar_view')
+        else:
+            try:
+                start_date = datetime(year, month, day).date()
+            except ValueError:
+                messages.error(
+                    request, 
+                    "Invalid date provided. Redirecting to current week.."
+                )
+                return redirect('calendar_view')
     else:
         start_date = today
 
