@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <section>
@@ -27,7 +28,7 @@
         {% if not user.is_authenticated %}
         <div class="alert alert-secondary text-center" role="alert">
             To use our booking system, please <a href="{% url 'account_login' %}" class="alert-link">Login</a> or <a href="{% url 'account_signup' %}" class="alert-link">Register</a> for an account.
-          </div>
+        </div>
         {% endif %}
 
         <div class="calendar">
@@ -38,23 +39,21 @@
                         <span class="{% if day.date == today %} today {% endif %}">
                             &nbsp; {{ day.date.day }}
                         </span>
-                        <span> 
-                            &nbsp;  {{ day.date|date:"D" }} 
+                        <span>
+                            &nbsp;  {{ day.date|date:"D" }}
                         </span>
                     </div>
                     <ul class="time-slots list-unstyled row">
                         {% for slot in day.slots %}
                         <li class="col">
-                            <form action="{% url 'book_appointment' %}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="date" value="{{ day.date|date:'Y-m-d' }}">
-                                <input type="hidden" name="time_slot" value="{{ slot.time }}">
-                                <input type="hidden" name="service" value="1">
-                                <button type="submit" class="btn {% if slot.booked or day.is_weekend %} btn-secondary {% else %} btn-primary {% endif %}" 
-                                        {% if slot.booked or day.is_weekend or not user.is_authenticated %} disabled {% endif %}>
-                                    {{ slot.time }}
-                                </button>
-                            </form>
+                            <button type="button" class="btn {% if slot.booked or day.is_weekend %} btn-secondary {% else %} btn-primary {% endif %}"
+                                {% if slot.booked or day.is_weekend or not user.is_authenticated %} disabled {% endif %}
+                                data-date="{{ day.date|date:'Y-m-d' }}"
+                                data-time="{{ slot.time }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#serviceModal">
+                                {{ slot.time }}
+                            </button>
                         </li>
                         {% endfor %}
                     </ul>
@@ -65,4 +64,42 @@
 
     </div>
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="serviceModal" tabindex="-1" aria-labelledby="serviceModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="serviceModalLabel">Appointment</h5> <!-- Title populated by JS -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="bookingForm" method="post" action="{% url 'book_appointment' %}">
+              {% csrf_token %}
+              <div class="modal-body">
+                  <div class="mb-3">
+                      <input type="hidden" name="date" id="modalDate">
+                      <input type="hidden" name="time_slot" id="modalTimeSlot">
+                      <label for="serviceSelect" class="form-label">Treatment type</label>
+                      <select id="serviceSelect" name="service" class="form-select" required>
+                          <option value="" disabled selected>Select one</option>
+                          {% for service in services %}
+                          <option value="{{ service.id }}">{{ service.name }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+              </div>
+              <div class="col-6 mx-auto my-4">
+                  <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" class="btn btn-lg btn-primary" data-bs-target="#serviceModal">Book</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+  
+{% endblock %}
+
+{% block extras %}
+<script src="{% static 'js/appointment.js' %}"></script>
 {% endblock %}

@@ -4,7 +4,7 @@ from django.contrib import messages
 from datetime import datetime, timedelta
 from patient.models import Patient
 from .forms import BookAppointmentForm
-from .models import Appointment
+from .models import Appointment, Service
 from django.urls import reverse 
 from django.http import HttpResponseRedirect
 import logging
@@ -236,6 +236,9 @@ def calendar_view(request, year=None, month=None, day=None):
     # ..starting from start_date
     is_current_week = (start_date <= today <= start_date + timedelta(days=6))
 
+    # Get all services
+    services = Service.objects.all()
+
     context = {
         'week_data': week_data,
         'current_week': f"Week of {start_date.strftime('%B %d, %Y')}",
@@ -247,6 +250,7 @@ def calendar_view(request, year=None, month=None, day=None):
         'prev_month': prev_week_start.month,
         'prev_day': prev_week_start.day,
         'show_current_week_button': not is_current_week,  
+        'services': services,
     }
 
     return render(request, 'appointment/calendar.html', context)
