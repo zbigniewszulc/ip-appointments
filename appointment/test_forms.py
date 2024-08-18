@@ -17,3 +17,12 @@ class TestBookAppointmentForm(TestCase):
             'time_slot': '14:00'
         })
         self.assertTrue(appointment_form.is_valid(), msg='Form is not valid')
+
+    def test_form_is_invalid(self):
+        """ Test whether form is invalid """
+        appointment_form = BookAppointmentForm({
+            'service': '',
+            'date': '', 
+            'time_slot': ''
+        })
+        self.assertFalse(appointment_form.is_valid(), msg='Form is valid')
