@@ -26,3 +26,15 @@ class TestBookAppointmentForm(TestCase):
             'time_slot': ''
         })
         self.assertFalse(appointment_form.is_valid(), msg='Form is valid')
+
+    def test_service_required(self):
+        """ Test for 'service' field """
+        appointment_form = BookAppointmentForm({
+            'service': '',
+            'date': '2024-08-22', 
+            'time_slot': '14:00'
+        })
+        self.assertFalse(
+            appointment_form.is_valid(), 
+            msg='Service was not provided, but the form is valid'
+        )
