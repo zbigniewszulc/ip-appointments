@@ -2,9 +2,6 @@ from allauth.account.forms import SignupForm
 from django import forms
 from .models import Patient
 from django.core.validators import RegexValidator
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
 
 # Formula for number phone validation. Using built-in regex validator.
 phone_regex = RegexValidator( 
