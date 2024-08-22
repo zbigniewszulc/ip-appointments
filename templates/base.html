@@ -171,26 +171,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer">
     </script>
 
-<script> 
-$(document).ready(function () { 
-    // Time delay between each toast (milliseconds)
-    var delay = 2000; 
-    // Iterate over each toast 
-    $('.toast').each(function(index) { 
-        // Show each toast with a delay 
-        setTimeout(() => $(this).toast('show'), delay * index); 
-    }); 
-
-    // still required - according to documentation
-    $('[data-bs-toggle="popover"]').popover(); 
-    $('#openingHours').on('click', function(e) {
-        // Prevent default action
-        e.preventDefault();
-
-        $(this).popover('toggle');
-    }); 
-});
-</script>
+{% block toast %}
+<script src="{% static 'js/toast.js' %}"></script>
+{% endblock %}
 
 {% block extras %}
 {% endblock %}
