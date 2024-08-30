@@ -30,3 +30,5 @@ for (let button of timeSlotButtons) {
         modalTitle.innerText = `Appointment: ${formattedDate} at ${timeSlot}`;
     });
 }
+
+module.exports = formatDate;
