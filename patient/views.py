@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PatientSignupForm
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
 from appointment.models import Appointment
+from django.contrib import messages
 
 # Create your views here.
 
@@ -10,10 +13,10 @@ def index(request):
     Display the patient signup form.
 
     Args:
-        request: The HTTP request object.
+        request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: Rendered HTML template containing patient signup form.
+        HttpResponse: Rendered HTML template containing the patient signup form.
 
     Template:
         `patient/index.html`
@@ -62,3 +65,59 @@ def my_appointments(request):
 
     return render(request, 'patient/my_appointments.html', 
         {'appointments': appointments, 'message': message})
+
+@login_required
+def cancel_appointment(request, appointment_id):
+    """
+    Cancel an appointment for the logged-in patient.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        appointment_id (int): The ID of the appointment to be canceled.
+
+    Returns:
+        HttpResponseRedirect: Redirects to the `my_appointments` page 
+        after cancellation.
+
+    Template:
+        `patient/my_appointments.html`
+
+    Context:
+        Redirects after canceling - no context
+    """
+    appointment = get_object_or_404(
+        Appointment, id=appointment_id, patient=request.user.patient)
+
+    if request.method == 'POST':
+        appointment.delete()
+
+        # Send confirmation email to the patient
+        subject = 'Appointment Cancellation Confirmation'
+        message = (
+            f'Dear {request.user.first_name},\n\n'
+            f'Your appointment for {appointment.service.name} '
+            f'on {appointment.date} at {appointment.time_slot} '
+            'has been successfully cancelled.\n\n'
+            'Thank you for using our booking system.\n\n'
+            'Best Regards,\nInfinita Perfectio'
+        )
+        
+        try:
+            send_mail(
+                subject, message, settings.DEFAULT_FROM_EMAIL, 
+                [request.user.email])
+        except Exception as e:
+            # Log error if occured
+            print(f"Error sending email for appointment cancellation: {e}")
+
+        # Add success message 
+        messages.success(
+            request, 'Your appointment has been successfully canceled.')
+
+        return redirect('my_appointments')
+    
+    # In case if there was error cancelling appointment
+    messages.error(
+        request, 'Failed to cancel the appointment. Please try again.')
+
+    return redirect('my_appointments')
