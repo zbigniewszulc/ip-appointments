@@ -59,9 +59,11 @@
                 <li>
                     <a href="#" aria-label="Open my details page">My details</a>
                 </li>
+                {% if not request.user.is_superuser %}
                 <li>
                     <a href="{% url 'my_appointments' %}" aria-label="Open my appointments page">My appointments</a>
                 </li>
+                {% endif %}
                 <li>
                     <a href="{% url 'account_logout' %}" aria-label="Log off link">Logout</a>
                 </li>
