@@ -91,8 +91,15 @@
               </div>
               <div class="col-6 mx-auto my-4">
                   <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  {% if not request.user.is_superuser %}
                   <button type="submit" class="btn btn-lg btn-primary" data-bs-target="#serviceModal">Book</button>
+                  {% endif %}
               </div>
+              {% if request.user.is_superuser %}
+              <p class="mx-5 my-4 text-danger">
+                <em>You cannot book this appointment because you are logged in as administartor</em>
+              </p>
+              {% endif %}
           </form>
       </div>
   </div>
