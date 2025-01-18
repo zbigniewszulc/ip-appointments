@@ -31,8 +31,11 @@ for (let button of timeSlotButtons) {
         modalTimeSlotInput.value = timeSlot;
 
         // For appointments in the past
-        if (withinDate === 'false' || (withinDate === 'true' && withinTime === 'false')) {
-            submitButton.classList.add('d-none');  // Disable the book button
+        if (withinDate === 'true') {
+            submitButton.classList.remove('d-none'); // Show the book button
+            infoSection.innerHTML = ''; // Clear any previous messages
+        } else if (withinDate === 'false' || (withinDate === 'true' && withinTime === 'false')) {
+            submitButton.classList.add('d-none'); // Hide the book button
             infoSection.innerHTML = '<p class="my-4 text-center text-danger"><em>Past appointments cannot be booked</em></p>';
         } 
 
