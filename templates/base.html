@@ -57,7 +57,9 @@
             <ul id="nav-wrapper">
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="#" aria-label="Open my details page">My details</a>
+                    <a href="#" class="position-relative" aria-label="Open my details page">My details
+                        <span class="position-absolute bg-info text-light end-50 translate-middle badge rounded-pill">{{ user.username }}</span>
+                    </a>
                 </li>
                 {% if not request.user.is_superuser %}
                 <li>
