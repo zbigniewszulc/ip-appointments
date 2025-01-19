@@ -5,8 +5,10 @@ from django.core.mail import send_mail
 from django.conf import settings
 from appointment.models import Appointment
 from django.contrib import messages
+from .models import Patient
 
 # Create your views here.
+
 
 def index(request):
     """
@@ -33,6 +35,7 @@ def index(request):
             "patient_signup_form": patient_signup_form, 
         }, 
     )
+
 
 @login_required
 def my_appointments(request):
@@ -65,6 +68,7 @@ def my_appointments(request):
 
     return render(request, 'patient/my_appointments.html', 
         {'appointments': appointments, 'message': message})
+
 
 @login_required
 def cancel_appointment(request, appointment_id):
@@ -121,3 +125,27 @@ def cancel_appointment(request, appointment_id):
         request, 'Failed to cancel the appointment. Please try again.')
 
     return redirect('my_appointments')
+
+
+@login_required
+def my_details(request):
+    """
+    View personal details of the logged-in patient.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Renders `my_details` template with the patient's details.
+
+    Template:
+        `patient/my_details.html`
+
+    Context:
+        patient (Patient): The details of the logged-in patient.
+    """
+    patient = get_object_or_404(Patient, user=request.user)
+    context ={
+        'patient' : patient
+    }
+    return render(request, 'patient/my_details.html', context)

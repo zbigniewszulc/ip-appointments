@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center mb-4">My Details</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6"> 
+            <div class="card">
+                <h5 class="card-header">Username: {{ patient.user }}</h5>
+                <div class="card-body">
+                    <table class="table table-borderless" >
+                        <tr>
+                            <th>
+                                First name:
+                            </th>
+                            <td>
+                                {{ patient.user.first_name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Last name:
+                            </th>
+                            <td>
+                                {{ patient.user.last_name }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                E-mail:
+                            </th>
+                            <td>
+                                {{ patient.user.email }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Date of birth:
+                            </th>
+                            <td>
+                                {{ patient.date_of_birth }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Address line 1:
+                            </th>
+                            <td>
+                                {{ patient.address_line_1 }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Address line 2:
+                            </th>
+                            <td>
+                                {{ patient.address_line_2 }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Address line 3:
+                            </th>
+                            <td>
+                                {{ patient.address_line_3 }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Phone number:
+                            </th>
+                            <td>
+                                {{ patient.phone_number }}
+                            </td>
+                        </tr>
+                    </table>
+                  <a href="#" class="btn btn-primary mt-4">Edit my details</a>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
