@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 
 
 # Formula for number phone validation. Using built-in regex validator.
-# Phone number has nine to fifteen digits, with option to begin with a plus sign
-phone_regex = RegexValidator( 
-    regex=r'^\+?[0-9]{9,15}$', 
-    message=('Invalid phone number. '
+# Phone number has nine to fifteen digits, with option to begin with plus sign
+phone_regex = RegexValidator(
+    regex=r'^\+?[0-9]{9,15}$',
+    message=(
+        'Invalid phone number. '
         'Accepted formats .e.g.: 0800123123 or with prefix +353800123123'
     )
 )
@@ -21,18 +22,23 @@ class PatientSignupForm(SignupForm):
     first_name = forms.CharField(min_length=2, max_length=150, required=True)
     last_name = forms.CharField(min_length=2, max_length=150, required=True)
     date_of_birth = forms.DateField(
-        required=True, 
+        required=True,
         widget=forms.DateInput(attrs={'type': 'date', 'min': '1900-01-01'})
     )
-    address_line_1 = forms.CharField(min_length=2,max_length=100, required=True)
-    address_line_2 = forms.CharField(min_length=2,max_length=100, required=True)
+    address_line_1 = forms.CharField(
+        min_length=2, max_length=100, required=True
+    )
+    address_line_2 = forms.CharField(
+        min_length=2, max_length=100, required=True
+    )
     address_line_3 = forms.CharField(max_length=100, required=False)
-    phone_number = forms.CharField(min_length=9, max_length=15, 
-        required=True, validators=[phone_regex])
+    phone_number = forms.CharField(
+        min_length=9, max_length=15, required=True, validators=[phone_regex]
+    )
 
-    # Override save() method to customize form saving process 
+    # Override save() method to customize form saving process
     def save(self, request):
-        # Call save() method from parent class 
+        # Call save() method from parent class
         user = super().save(request)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
@@ -56,21 +62,21 @@ class PatientSignupForm(SignupForm):
 class EditUserDetailsForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']  
+        fields = ['first_name', 'last_name', 'email']
 
 
 # Update Patient's details Form
 class EditPatientDetailsForm(forms.ModelForm):
     date_of_birth = forms.DateField(
-        required=True, 
+        required=True,
         widget=forms.DateInput(attrs={'type': 'date', 'min': '1900-01-01'})
     )
     phone_number = forms.CharField(
-        min_length=9, 
-        max_length=15, 
-        required=True, 
+        min_length=9,
+        max_length=15,
+        required=True,
         validators=[phone_regex],
-        # This widget definition will add validation on the front end 
+        # This widget definition will add validation on the front end
         widget=forms.TextInput(
             attrs={
                 'pattern': r'^\+?[0-9]{9,15}$',
@@ -83,6 +89,6 @@ class EditPatientDetailsForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = [
-            'date_of_birth', 'address_line_1', 'address_line_2', 
-            'address_line_3', 'phone_number', 
+            'date_of_birth', 'address_line_1', 'address_line_2',
+            'address_line_3', 'phone_number',
         ]

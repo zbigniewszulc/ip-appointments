@@ -5,6 +5,7 @@ from patient.models import Patient
 from django.contrib.auth.models import User
 from datetime import datetime
 
+
 class TestCalendarView(TestCase):
 
     def setUp(self):
@@ -13,21 +14,21 @@ class TestCalendarView(TestCase):
 
         # Create sample user and log in
         self.user = User.objects.create_user(
-            username = 'TestUser',
-            password = 'SamplePassword123',
-            first_name = 'Test', 
-            last_name = 'User',
-            email = 'test@test.com'
+            username='TestUser',
+            password='SamplePassword123',
+            first_name='Test',
+            last_name='User',
+            email='test@test.com'
         )
         self.client.login(username='TestUser', password='SamplePassword123')
 
         # Create sample patient
         self.patient = Patient.objects.create(
-            user = self.user, 
-            date_of_birth = '1999-01-02',
-            address_line_1 = '123 Pinewoods Drive',
-            address_line_2 = 'Clondalkin',
-            address_line_3 = '',
+            user=self.user,
+            date_of_birth='1999-01-02',
+            address_line_1='123 Pinewoods Drive',
+            address_line_2='Clondalkin',
+            address_line_3='',
             phone_number='0860860860'
         )
 
@@ -37,15 +38,17 @@ class TestCalendarView(TestCase):
         self.appointment_slot = datetime.strptime('14:00', '%H:%M').time()
 
         self.appointment = Appointment.objects.create(
-            patient = self.patient, 
-            service = self.service,
-            date = self.appointment_date,
-            time_slot =self.appointment_slot
-        )   
+            patient=self.patient,
+            service=self.service,
+            date=self.appointment_date,
+            time_slot=self.appointment_slot
+        )
 
     def test_render_calendar_view(self):
         """ Test calendar rendering """
-        response = self.client.get(reverse('calendar_view', args=[2024, 8, 19]))
+        response = self.client.get(
+            reverse('calendar_view', args=[2024, 8, 19])
+        )
         self.assertEqual(response.status_code, 200)
         # Check the template used for rendering
         self.assertTemplateUsed(response, 'appointment/calendar.html')
@@ -59,7 +62,9 @@ class TestCalendarView(TestCase):
 
     def test_render_calendar_view_with_booked_appointment(self):
         """ Test calendar rendering with previously booked appointment """
-        response = self.client.get(reverse('calendar_view', args=[2024, 8, 19]))
+        response = self.client.get(
+            reverse('calendar_view', args=[2024, 8, 19])
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'appointment/calendar.html')
         # Check the context whether booked slot appears in week_data
@@ -69,10 +74,10 @@ class TestCalendarView(TestCase):
             if day['date'] == self.appointment_date:
                 for slot in day['slots']:
                     if slot['time'] == self.appointment_slot.strftime(
-                        '%H:%M') and slot['booked']:
+                            '%H:%M') and slot['booked']:
                         appointment_found = True
                         break
         self.assertTrue(
-            appointment_found, 
+            appointment_found,
             msg='The booked slot was not found in the calendar'
         )

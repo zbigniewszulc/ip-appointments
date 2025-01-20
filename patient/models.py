@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Patient(models.Model):
     user = models.OneToOneField(
-        User, 
-        on_delete=models.CASCADE, 
+        User,
+        on_delete=models.CASCADE,
         related_name="patient"
     )
     date_of_birth = models.DateField()
@@ -16,7 +16,7 @@ class Patient(models.Model):
     phone_number = models.CharField(max_length=15)
     updated_on = models.DateTimeField(auto_now=True)
 
-    class Meta: 
+    class Meta:
         # refer to a field of related model 'User' by using '__'
         # '__' - used to navigate throught related models
         ordering = ["user__last_name", "user__first_name"]

@@ -6,7 +6,8 @@ class FourDigitYearConverter:
 
     def to_url(self, value):
         return "%04d" % value
-    
+
+
 class TwoDigitMonthDayConverter:
     regex = "[0-9]{2}"
 

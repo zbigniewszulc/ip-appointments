@@ -5,60 +5,64 @@ from datetime import datetime, timedelta
 from patient.models import Patient
 from .forms import BookAppointmentForm
 from .models import Appointment, Service
-from django.urls import reverse 
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 import logging
 logger = logging.getLogger('django')
 
-def get_previous_Sunday_date (start_date):
+
+def get_previous_Sunday_date(start_date):
     """
     Calculate date of the previous Sunday from given date.
 
-    Adjusts the given date to the most recent previous Sunday. 
+    Adjusts the given date to the most recent previous Sunday.
     If the given date is already a Sunday, it will return the same date.
 
     Args:
-        start_date (datetime.date): Date from which to calculate previous Sunday
+        start_date (datetime.date): Date from which to calculate
+        previous Sunday
 
     Returns:
         datetime.date: The date of the previous Sunday.
 
     Notes:
-        - `timedelta` to calculate the difference 
+        - `timedelta` to calculate the difference
             between given date and the previous Sunday.
-        - `start_date.weekday()` returns an integer representing 
+        - `start_date.weekday()` returns an integer representing
             day of the week (Monday is 0 and Sunday is 6).
-        - `(start_date.weekday() + 1) % 7` calculates the number of days 
+        - `(start_date.weekday() + 1) % 7` calculates the number of days
             to subtract, to get to the previous Sunday.
     """
     previous_sunday = start_date = start_date - timedelta(
         days=(start_date.weekday() + 1) % 7
     )
-    return previous_sunday  
+    return previous_sunday
+
 
 def generate_week_calendar(start_date):
-    """ 
+    """
     Returns list of dates representing a week starting from Sunday.
 
     Args:
-        start_date (datetime.date): Starting date for the week. 
+        start_date (datetime.date): Starting date for the week.
             Function will adjust this date to the previous Sunday.
 
     Returns:
-        list of datetime.date: A list of 7 datetime.date objects representing 
-            the week from Sunday to Satrday.
+        list of datetime.date: A list of 7 datetime.date
+        objects representing the week from Sunday to Satrday.
     """
     start_date = get_previous_Sunday_date(start_date)
     # List comprehension - to generate a list of dates representing a week
     week = [start_date + timedelta(days=i) for i in range(7)]
     return week
 
+
 def get_time_slots():
-    """ 
+    """
     Generate a list of hourly time slots.
 
     Returns:
-        list of str: A list of time slots in the format 'HH:MM' 
+        list of str: A list of time slots in the format 'HH:MM'
             from 10:00 to 17:00.
 
     Notes:
@@ -77,8 +81,9 @@ def get_time_slots():
         start_time += delta
     return time_slots
 
+
 def get_booked_slots(date):
-    """ 
+    """
     Returns list of booked time slots for a given date.
 
     Args:
@@ -92,7 +97,8 @@ def get_booked_slots(date):
     booked_slots = queryset.values_list('time_slot', flat=True)
     logger.info(f"Booked slots: {booked_slots}")
     return booked_slots
-    
+
+
 def is_slot_booked(slot, booked_slots):
     """
     Check if the given time slot is booked.
@@ -110,23 +116,24 @@ def is_slot_booked(slot, booked_slots):
 
     return slot in booked_slots_str
 
+
 def get_week_calendar_with_slots(start_date):
-    """ 
+    """
     Generate a weekly calendar with time slots and booking information.
 
     Args:
-        start_date (datetime.date): The starting date of the week. 
+        start_date (datetime.date): The starting date of the week.
            Week will be calculated starting from the nearest previous Sunday.
 
     Returns:
-        list of dict: A list of dictionaries, each representing a day 
+        list of dict: A list of dictionaries, each representing a day
             in the week, including the following keys:
                 - 'date' (datetime.date): The date for the day.
-                - 'slots' (list of dict): Time slots for the day, 
+                - 'slots' (list of dict): Time slots for the day,
                     where each dictionary contain:
                     - 'time' (str): The time slot in 'HH:MM' format.
                     - 'booked' (bool): Whether the time slot is booked.
-                - 'is_weekend' (bool): `True` if the day is Saturday or Sunday, 
+                - 'is_weekend' (bool): `True` if the day is Saturday or Sunday,
                     `False` otherwise.
     """
     week_days = generate_week_calendar(start_date)
@@ -151,39 +158,40 @@ def get_week_calendar_with_slots(start_date):
             'is_weekend': date.weekday() in [5, 6]
         }
         week_with_slots.append(day_info)
-        
+
     return week_with_slots
 
+
 def calendar_view(request, year=None, month=None, day=None):
-    """ 
+    """
     Render a calendar view for provided week starting on Sunday.
 
-    Calculates the start date of the week based on the provided 
-    year(2000 onward), month, and day, or defaults to today's date. Then, it generates a 
-    weekly calendar with time slots and booking information, and renders a 
-    template with this data.
+    Calculates the start date of the week based on the provided
+    year(2000 onward), month, and day, or defaults to today's date.
+    Then, it generates a weekly calendar with time slots and booking
+    information, and renders a template with this data.
 
     Args:
         request (HttpRequest): The HTTP request object.
-        year (int, optional): Year to display. Defaults to the current year 
+        year (int, optional): Year to display. Defaults to the current year
             if not provided.
-        month (int, optional): Month to display. Defaults to the 
+        month (int, optional): Month to display. Defaults to the
             current month if not provided.
-        day (int, optional): The day to display. Defaults to the current day if 
+        day (int, optional): The day to display. Defaults to the current day if
             not provided.
 
     Returns:
         HttpResponse: Rendered HTML page for the calendar view.
 
     Context:
-        - week_data (list of dict): A list of dictionaries representing each day 
+        - week_data (list of dict): list of dictionaries representing each day
             in the week. Each dictionary contains:
             - 'date' (datetime.date): The date for the day.
-            - 'slots' (list of dict): Time slots for the day, where 
+            - 'slots' (list of dict): Time slots for the day, where
                 each dictionary contains:
                 - 'time' (str): The time slot in 'HH:MM' format.
                 - 'booked' (bool): Whether the time slot is booked.
-            - 'is_weekend' (bool): `True` if the day is Saturday or Sunday, 
+            - 'is_weekend' (bool): `True` if the day is Saturday or Sunday,
                 `False` otherwise.
         - current_week (str): String representing the current week.
         - today (datetime.date): The current date.
@@ -193,12 +201,12 @@ def calendar_view(request, year=None, month=None, day=None):
         - prev_year (int): The year for the previous week.
         - prev_month (int): The month for the previous week.
         - prev_day (int): The day for the previous week.
-        - show_current_week_button (bool): `True` if the button to show the 
+        - show_current_week_button (bool): `True` if the button to show the
         current week should be displayed.
     """
-    # sample of what method today() of datetime class returns.. 
+    # sample of what method today() of datetime class returns..
     # ..(e.g. (2024, 7, 27, 12, 0, 0))
-    # method date() of the datetime object extracts the date part.. 
+    # method date() of the datetime object extracts the date part..
     # ..(e.g. (2024, 7, 27))
     today = datetime.today().date()
 
@@ -212,7 +220,7 @@ def calendar_view(request, year=None, month=None, day=None):
                 start_date = datetime(year, month, day).date()
             except ValueError:
                 messages.error(
-                    request, 
+                    request,
                     "Invalid date provided. Redirecting to current week.."
                 )
                 return redirect('calendar_view')
@@ -223,16 +231,16 @@ def calendar_view(request, year=None, month=None, day=None):
     # .. Sat/Sun are closing days, calendar looks better if on oposite poles
     start_date = get_previous_Sunday_date(start_date)
 
-    # List of dictionaries, where each dictionary represents a day in the week..
+    # List of dictionaries, where each dictionary represents a day in the week
     # ..inluding date, timelots with booking status and if it is weekend
     week_data = get_week_calendar_with_slots(start_date)
 
     # Determine the date for begining of the next week (for Next button)
     next_week_start = start_date + timedelta(days=7)
-    # Determine the date for begining of the previous week (for Previous button)
+    # Determine date for begining of the previous week (for Previous button)
     prev_week_start = start_date - timedelta(days=7)
 
-    # Check if the current date (today) falls within the week.. 
+    # Check if the current date (today) falls within the week..
     # ..starting from start_date
     is_current_week = (start_date <= today <= start_date + timedelta(days=6))
 
@@ -249,25 +257,26 @@ def calendar_view(request, year=None, month=None, day=None):
         'prev_year': prev_week_start.year,
         'prev_month': prev_week_start.month,
         'prev_day': prev_week_start.day,
-        'show_current_week_button': not is_current_week,  
+        'show_current_week_button': not is_current_week,
         'services': services,
     }
 
     return render(request, 'appointment/calendar.html', context)
 
+
 @login_required
 def book_appointment(request):
     """
     Handles the booking of an appointment for logged-in user.
-    Validates the form data, checks slot availability, and handles booking. 
-    Redirects to the calendar view for the specified date 
+    Validates the form data, checks slot availability, and handles booking.
+    Redirects to the calendar view for the specified date
     or shows error messages.
 
     Args:
         request (HttpRequest): The HTTP request object containing form data.
 
     Returns:
-        HttpResponse: Redirects to the updated calendar view or shows error msg.
+        HttpResponse: Redirects to updated calendar view or shows error msg.
     """
     if request.method == "POST":
         form = BookAppointmentForm(data=request.POST)
@@ -282,7 +291,7 @@ def book_appointment(request):
             except Patient.DoesNotExist:
                 messages.error(
                     request,
-                    "We could not find your username session." +
+                    "We could not find your username session."
                     "Make sure you are logged in"
                 )
                 return redirect('calendar_view')
@@ -307,12 +316,12 @@ def book_appointment(request):
             messages.error(request, "Error: Invalid form data.")
 
     # Extract year, month, and day from the 'date' form field..
-    # ..to establish redirection 
-    year = date.year 
-    month = date.month 
+    # ..to establish redirection
+    year = date.year
+    month = date.month
     day = date.day
 
-    # Redirect to calendar view with the date established above 
+    # Redirect to calendar view with the date established above
     return HttpResponseRedirect(
         reverse('calendar_view', args=[year, month, day])
     )

@@ -29,12 +29,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False    
-#DEBUG = True   
+DEBUG = False
+# DEBUG = True
 
-ALLOWED_HOSTS = ['8000-zbigniewszu-ipappointme-lu7clkc10h2.ws.codeinstitute-ide.net',
-                '.herokuapp.com', 
-                'localhost']
+ALLOWED_HOSTS = [
+    '8000-zbigniewszu-ipappointme-lu7clkc10h2.ws.codeinstitute-ide.net',
+    '.herokuapp.com',
+    'localhost'
+]
 
 
 # Application definition
@@ -66,7 +68,7 @@ SITE_ID = 1
 # Allauth settings
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {'signup': 'patient.forms.PatientSignupForm'}
-ACCOUNT_EMAIL_REQUIRED = True 
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_EMAIL_NOTIFICATIONS = True
 
@@ -134,16 +136,25 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.NumericPasswordValidator'
+        ),
     },
 ]
 

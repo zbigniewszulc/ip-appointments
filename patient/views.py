@@ -20,7 +20,8 @@ def index(request):
         request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: Rendered HTML template containing the patient signup form.
+        HttpResponse: Rendered HTML template containing the
+        patient signup form.
 
     Template:
         `patient/index.html`
@@ -29,13 +30,13 @@ def index(request):
         patient_signup_form (PatientSignupForm): Instance of PatientSignupForm.
     """
     patient_signup_form = PatientSignupForm()
-    
-    return render( 
-        request, 
-        "patient/index.html", 
-        { 
-            "patient_signup_form": patient_signup_form, 
-        }, 
+
+    return render(
+        request,
+        "patient/index.html",
+        {
+            "patient_signup_form": patient_signup_form,
+        },
     )
 
 
@@ -49,27 +50,29 @@ def my_appointments(request):
 
     Returns:
         HttpResponse: Rendered HTML template containing patient's appointments.
-        
+
     Template:
         `patient/my_appointments.html`
 
     Context:
-        appointments (QuerySet): A list of the patient's appointments, 
+        appointments (QuerySet): A list of the patient's appointments,
             sorted by date and time slot
-        message (str): A message indicating there are no appointments, 
+        message (str): A message indicating there are no appointments,
             if applicable.
     """
     appointments = Appointment.objects.filter(
         patient=request.user.patient).order_by('-date', '-time_slot')
-    
+
     # assign default message variable to none
-    message = None 
+    message = None
 
     if not appointments:
-        message = 'You have no appointments booked so far yet!' 
+        message = 'You have no appointments booked so far yet!'
 
-    return render(request, 'patient/my_appointments.html', 
-        {'appointments': appointments, 'message': message})
+    return render(
+        request, 'patient/my_appointments.html',
+        {'appointments': appointments, 'message': message}
+    )
 
 
 @login_required
@@ -82,7 +85,7 @@ def cancel_appointment(request, appointment_id):
         appointment_id (int): The ID of the appointment to be canceled.
 
     Returns:
-        HttpResponseRedirect: Redirects to the `my_appointments` page 
+        HttpResponseRedirect: Redirects to the `my_appointments` page
         after cancellation.
 
     Template:
@@ -107,21 +110,21 @@ def cancel_appointment(request, appointment_id):
             'Thank you for using our booking system.\n\n'
             'Best Regards,\nInfinita Perfectio'
         )
-        
+
         try:
             send_mail(
-                subject, message, settings.DEFAULT_FROM_EMAIL, 
+                subject, message, settings.DEFAULT_FROM_EMAIL,
                 [request.user.email])
         except Exception as e:
             # Log error if occured
             print(f"Error sending email for appointment cancellation: {e}")
 
-        # Add success message 
+        # Add success message
         messages.success(
             request, 'Your appointment has been successfully canceled.')
 
         return redirect('my_appointments')
-    
+
     # In case if there was error cancelling appointment
     messages.error(
         request, 'Failed to cancel the appointment. Please try again.')
@@ -147,9 +150,7 @@ def my_details(request):
         patient (Patient): The details of the logged-in patient.
     """
     patient = get_object_or_404(Patient, user=request.user)
-    context ={
-        'patient' : patient
-    }
+    context = {'patient': patient}
     return render(request, 'patient/my_details.html', context)
 
 
@@ -162,7 +163,7 @@ def edit_my_details(request):
         request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: Renders `edit_my_details` template 
+        HttpResponse: Renders `edit_my_details` template
             with the patient's details.
 
     Template:
@@ -178,29 +179,29 @@ def edit_my_details(request):
     if request.method == 'POST':
         user_form = EditUserDetailsForm(request.POST, instance=user)
         patient_form = EditPatientDetailsForm(request.POST, instance=patient)
-        
+
         # Validate both forms
-        if user_form.is_valid() and patient_form.is_valid():  
+        if user_form.is_valid() and patient_form.is_valid():
             user_form.save()  # Save user details
             patient_form.save()  # Save patient details
             messages.success(
-                request, 
+                request,
                 'Your details have been updated successfully!'
             )
-            return redirect('my_details')  
+            return redirect('my_details')
         else:
             messages.error(
-                request, 
+                request,
                 'There was an error updating your details. Try again later.'
             )
-    
+
     # Initialise forms with current user and patient data
     user_form = EditUserDetailsForm(instance=user)
     patient_form = EditPatientDetailsForm(instance=patient)
-    
-    context ={
-        'user' : user,
-        'user_form' : user_form,
-        'patient_form' : patient_form
+
+    context = {
+        'user': user,
+        'user_form': user_form,
+        'patient_form': patient_form
     }
     return render(request, 'patient/edit_my_details.html', context)

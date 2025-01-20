@@ -38,7 +38,7 @@ class TestPatientSignupForm(TestCase):
             'password2': ''
         })
         self.assertFalse(
-            patient_form.is_valid(), 
+            patient_form.is_valid(),
             msg='Form is valid despite missing data'
         )
 
