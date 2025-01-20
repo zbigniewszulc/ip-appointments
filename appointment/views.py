@@ -7,8 +7,6 @@ from .forms import BookAppointmentForm
 from .models import Appointment, Service
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-import logging
-logger = logging.getLogger('django')
 
 
 def get_previous_Sunday_date(start_date):
@@ -95,7 +93,6 @@ def get_booked_slots(date):
     # Fetch appointments for given date
     queryset = Appointment.objects.filter(date=date)
     booked_slots = queryset.values_list('time_slot', flat=True)
-    logger.info(f"Booked slots: {booked_slots}")
     return booked_slots
 
 
