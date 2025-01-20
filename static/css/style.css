@@ -161,6 +161,11 @@ article ul {
     margin-bottom: 25px;
 }
 
+#user-icon {
+    max-width: 30px; 
+    max-height: 30px;
+}
+
 /* Form */
 
 .calendar { 
