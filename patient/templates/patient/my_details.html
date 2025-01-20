@@ -11,71 +11,71 @@
                 <div class="card-body">
                     <table class="table table-borderless" >
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 First name:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.user.first_name }}
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 Last name:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.user.last_name }}
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 E-mail:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.user.email }}
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 Date of birth:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.date_of_birth }}
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 Address line 1:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.address_line_1 }}
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 Address line 2:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.address_line_2 }}
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 Address line 3:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.address_line_3 }}
                             </td>
                         </tr>
                         <tr>
-                            <th>
+                            <th class="w-25">
                                 Phone number:
                             </th>
-                            <td>
+                            <td class="text-break">
                                 {{ patient.phone_number }}
                             </td>
                         </tr>
                     </table>
-                  <a href="#" class="btn btn-primary mt-4">Edit my details</a>
+                  <a href="{% url 'edit_my_details' %}" class="btn btn-primary mt-4">Edit my details</a>
                 </div>
               </div>
         </div>
