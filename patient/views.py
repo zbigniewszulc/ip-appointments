@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import PatientSignupForm
+from .forms import (
+    PatientSignupForm, EditUserDetailsForm, EditPatientDetailsForm
+)
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
@@ -149,3 +151,56 @@ def my_details(request):
         'patient' : patient
     }
     return render(request, 'patient/my_details.html', context)
+
+
+@login_required
+def edit_my_details(request):
+    """
+    Edit personal details of the logged-in patient.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Renders `edit_my_details` template 
+            with the patient's details.
+
+    Template:
+        `patient/edit_my_details.html`
+
+    Context:
+        patient (Patient): The details of the logged-in patient.
+    """
+
+    user = request.user
+    patient = get_object_or_404(Patient, user=user)
+
+    if request.method == 'POST':
+        user_form = EditUserDetailsForm(request.POST, instance=user)
+        patient_form = EditPatientDetailsForm(request.POST, instance=patient)
+        
+        # Validate both forms
+        if user_form.is_valid() and patient_form.is_valid():  
+            user_form.save()  # Save user details
+            patient_form.save()  # Save patient details
+            messages.success(
+                request, 
+                'Your details have been updated successfully!'
+            )
+            return redirect('my_details')  
+        else:
+            messages.error(
+                request, 
+                'There was an error updating your details. Try again later.'
+            )
+    
+    # Initialise forms with current user and patient data
+    user_form = EditUserDetailsForm(instance=user)
+    patient_form = EditPatientDetailsForm(instance=patient)
+    
+    context ={
+        'user' : user,
+        'user_form' : user_form,
+        'patient_form' : patient_form
+    }
+    return render(request, 'patient/edit_my_details.html', context)
