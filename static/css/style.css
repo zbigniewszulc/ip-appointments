@@ -20,6 +20,7 @@ body {
     list-style-position: inside;
     line-height: normal;
 }
+
 /* Header */
 header {
     padding: 20px 15px;
@@ -84,7 +85,6 @@ header>nav {
 
 header>nav>ul {
     list-style-type: none;
-
 }
 
 #nav-wrapper i {
@@ -167,7 +167,6 @@ article ul {
 }
 
 /* Form */
-
 .calendar { 
     margin: 20px 0; 
 } 
@@ -195,24 +194,23 @@ article ul {
     list-style: 
     none; padding: 0; 
 } 
+
 .time-slots li { 
     margin: 20px 0; 
     padding: 10px 7px; 
     border-radius: 3px; 
 } 
+
 .available { 
     background-color: rgb(115 169 187);
     cursor: pointer; 
     color: white;
 } 
+
 .available:hover { 
     background-color: rgb(96, 144, 160);
     color: white; 
 } 
-.booked { 
-    background-color: #e6e6e6; 
-    color: #e6e6e6; 
-}
 
 #calendarStrapline {
     display: flex;
