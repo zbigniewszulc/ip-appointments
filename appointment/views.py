@@ -385,7 +385,7 @@ def edit_service(request, service_id):
         form = ServiceForm(request.POST, instance=service)
         if form.is_valid():
             form.save()
-            messages.success(request, "Service added successfully.")
+            messages.success(request, "Service updated successfully.")
         else:
             messages.error(request, "Error: Invalid form data.")
         return redirect('get_services')
