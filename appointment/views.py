@@ -322,3 +322,12 @@ def book_appointment(request):
     return HttpResponseRedirect(
         reverse('calendar_view', args=[year, month, day])
     )
+
+
+@login_required
+def get_services(request):
+    services = Service.objects.all().order_by('name')
+    context = {
+        'services': services
+    }
+    return render(request, 'appointment/services.html', context)

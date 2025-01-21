@@ -12,4 +12,5 @@ urlpatterns = [
         name='calendar_view'
     ),
     path('book/', views.book_appointment, name='book_appointment'),
+    path('services/', views.get_services, name='get_services'),
 ]

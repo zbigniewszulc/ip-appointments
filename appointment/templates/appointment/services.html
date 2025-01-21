@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mb-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <h2 class="text-center mt-1">All Dental Services Offered</h2>
+        </div>
+    </div>
+</div>
+<div class="container mb-4">
+    <div class="row justify-content-center">
+        <div class="col-6 col-sm-3 col-lg-2">
+            <a href="" class="btn btn-sm btn-secondary fw-bold">Add New Service</a>
+        </div>
+    </div>
+</div>
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <table class="table table-light text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">Service Name</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if services %}
+                    {% for service in services %}
+                  <tr>
+                    <td>{{ service.name }}</td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-outline-primary fw-bold">Edit</a>
+                        <a href="" class="btn btn-sm btn-outline-danger fw-bold">Delete</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <tr>
+                      <td colspan="2" class="text-center text-muted">No services available.</td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

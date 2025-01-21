@@ -56,12 +56,19 @@
         <nav>
             <ul id="nav-wrapper">
                 {% if user.is_authenticated %}
+                {% if request.user.is_superuser %}
                 <li>
-                    <a href="{% url 'my_details' %}" class="position-relative" aria-label="Open my details page">{% if not request.user.is_superuser %}My details{% endif %}
+                    <a href="{% url 'get_services' %}" class="position-relative" aria-label="Open dental services page">Dental Services
                         <span class="position-absolute bg-info text-light end-50 translate-middle badge rounded-pill">{{ user.username }}</span>
                     </a>
                 </li>
+                {% endif %}
                 {% if not request.user.is_superuser %}
+                <li>
+                    <a href="{% url 'my_details' %}" class="position-relative" aria-label="Open my details page">My details
+                        <span class="position-absolute bg-info text-light end-50 translate-middle badge rounded-pill">{{ user.username }}</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{% url 'my_appointments' %}" aria-label="Open my appointments page">My appointments</a>
                 </li>
