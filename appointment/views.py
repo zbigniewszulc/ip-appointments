@@ -389,9 +389,32 @@ def edit_service(request, service_id):
         else:
             messages.error(request, "Error: Invalid form data.")
         return redirect('get_services')
+    
     form = ServiceForm(instance=service)
     context = {
         'form': form
     }
 
     return render(request, 'appointment/edit_service.html', context)
+
+
+@login_required
+def delete_service(request, service_id):
+    """
+    Handles the deletion of existing service
+
+    Args:
+        request (HttpRequest): The HTTP request object containing the form data
+
+    Returns:
+        HttpResponse: Redirects to the service list page
+    """
+    service = get_object_or_404(Service, id=service_id)
+    if service:
+        service.delete()
+        messages.success(request, "Service deleted successfully.")
+    else:
+        messages.error(request, "Error: We could not delete the service")
+
+    return redirect('get_services')
+  
