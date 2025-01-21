@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from datetime import datetime, timedelta
 from patient.models import Patient
-from .forms import BookAppointmentForm, AddServiceForm
+from .forms import BookAppointmentForm, ServiceForm
 from .models import Appointment, Service
 from django.urls import reverse
 
@@ -354,7 +354,7 @@ def add_service(request):
         HttpResponse: Redirects to the service list page
     """
     if request.method == 'POST':
-        form = AddServiceForm(request.POST)
+        form = ServiceForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Service added successfully.")
@@ -362,8 +362,36 @@ def add_service(request):
             messages.error(request, "Error: Invalid form data.")
         return redirect('get_services')
         
-    form = AddServiceForm()
+    form = ServiceForm()
     context = {
         'form': form
     }
     return render(request, 'appointment/add_service.html', context)
+
+
+@login_required
+def edit_service(request, service_id):
+    """
+    Handles the edition of existing service
+
+    Args:
+        request (HttpRequest): The HTTP request object containing the form data
+
+    Returns:
+        HttpResponse: Redirects to the service list page
+    """
+    service = get_object_or_404(Service, id=service_id)
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, instance=service)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Service added successfully.")
+        else:
+            messages.error(request, "Error: Invalid form data.")
+        return redirect('get_services')
+    form = ServiceForm(instance=service)
+    context = {
+        'form': form
+    }
+
+    return render(request, 'appointment/edit_service.html', context)

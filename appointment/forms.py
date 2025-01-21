@@ -9,7 +9,7 @@ class BookAppointmentForm(forms.ModelForm):
         fields = ['date', 'time_slot', 'service']
 
 
-class AddServiceForm(forms.ModelForm):
+class ServiceForm(forms.ModelForm):
 
     class Meta:
         model = Service
