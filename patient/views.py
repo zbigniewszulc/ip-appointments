@@ -85,7 +85,7 @@ def cancel_appointment(request, appointment_id):
         appointment_id (int): The ID of the appointment to be canceled.
 
     Returns:
-        HttpResponseRedirect: Redirects to the `my_appointments` page
+        HttpResponse: Redirects to the `my_appointments` page
         after cancellation.
 
     Template:

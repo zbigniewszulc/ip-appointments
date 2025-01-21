@@ -3,10 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from datetime import datetime, timedelta
 from patient.models import Patient
-from .forms import BookAppointmentForm
+from .forms import BookAppointmentForm, AddServiceForm
 from .models import Appointment, Service
 from django.urls import reverse
-from django.http import HttpResponseRedirect
 
 
 def get_previous_Sunday_date(start_date):
@@ -319,15 +318,52 @@ def book_appointment(request):
     day = date.day
 
     # Redirect to calendar view with the date established above
-    return HttpResponseRedirect(
+    return redirect(
         reverse('calendar_view', args=[year, month, day])
     )
 
 
 @login_required
 def get_services(request):
+    """
+    Retrieves and displays all available dental services for the logged-in user
+    The services are ordered alphabetically by name.
+
+    Args:
+        request (HttpRequest): The HTTP request object 
+
+    Returns:
+        HttpResponse: Renders the 'services.html' template with services data
+    """
     services = Service.objects.all().order_by('name')
     context = {
         'services': services
     }
     return render(request, 'appointment/services.html', context)
+
+
+@login_required
+def add_service(request):
+    """
+    Handles the addition of a new service to the system.
+
+    Args:
+        request (HttpRequest): The HTTP request object containing the form data
+
+    Returns:
+        HttpResponse: Redirects to the service list page
+    """
+    if request.method == 'POST':
+        form = AddServiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Service added successfully.")
+        else:
+            messages.error(request, "Error: Invalid form data.")
+        return redirect('get_services')
+        
+    form = AddServiceForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'appointment/add_service.html', context)
