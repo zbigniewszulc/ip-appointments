@@ -1,5 +1,9 @@
 {% load static %}
 
+{% url 'my_details' as my_details %} 
+{% url 'my_appointments' as my_appointments %} 
+{% url 'get_services' as get_services %} 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,19 +62,19 @@
                 {% if user.is_authenticated %}
                 {% if request.user.is_superuser %}
                 <li>
-                    <a href="{% url 'get_services' %}" class="position-relative" aria-label="Open dental services page">Dental Services
+                    <a href="{% url 'get_services' %}" class="position-relative {% if request.path == get_services %}active{% endif %}" aria-label="Open dental services page">Dental Services
                         <span class="position-absolute bg-info text-light end-50 translate-middle badge rounded-pill">{{ user.username }}</span>
                     </a>
                 </li>
                 {% endif %}
                 {% if not request.user.is_superuser %}
                 <li>
-                    <a href="{% url 'my_details' %}" class="position-relative" aria-label="Open my details page">My details
+                    <a href="{% url 'my_details' %}" class="position-relative {% if request.path == my_details %}active{% endif %}" aria-label="Open my details page">My details
                         <span class="position-absolute bg-info text-light end-50 translate-middle badge rounded-pill">{{ user.username }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'my_appointments' %}" aria-label="Open my appointments page">My appointments</a>
+                    <a href="{% url 'my_appointments' %}" class="{% if request.path == my_appointments %}active{% endif %}" aria-label="Open my appointments page">My appointments</a>
                 </li>
                 {% endif %}
                 <li>
