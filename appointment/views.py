@@ -6,6 +6,8 @@ from patient.models import Patient
 from .forms import BookAppointmentForm, ServiceForm
 from .models import Appointment, Service
 from django.urls import reverse
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 def get_previous_Sunday_date(start_date):
@@ -308,6 +310,26 @@ def book_appointment(request):
                 )
                 appointment.save()
                 messages.success(request, "Appointment booked successfully.")
+
+                # Send confirmation email to the patient
+                subject = 'Appointment Confirmation'
+                message = (
+                    f'Dear {request.user.first_name},\n\n'
+                    f'Your appointment for {appointment.service.name} '
+                    f'on {appointment.date} at {appointment.time_slot} '
+                    'has been reserved successfully.\n\n'
+                    'Thank you for using our booking system.\n\n'
+                    'Best Regards,\nInfinita Perfectio'
+                )
+
+                try:
+                    send_mail(
+                        subject, message, settings.DEFAULT_FROM_EMAIL,
+                        [request.user.email])
+                except Exception as e:
+                    # Log error if occured
+                    print(f"Error sending email for appointment reservation: {e}")     
+
         else:
             messages.error(request, "Error: Invalid form data.")
 
