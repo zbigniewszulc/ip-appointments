@@ -27,7 +27,8 @@
                         <td>
                             <button class="btn btn-danger cancel-btn" data-bs-toggle="modal"
                                 data-bs-target="#cancelModal" data-appointment-id="{{ appointment.id }}"
-                                data-url="{% url 'cancel_appointment' appointment.id %}">
+                                data-url="{% url 'cancel_appointment' appointment.id %}" 
+                                data-appointment-date="{{ appointment.date }}" data-time-slot="{{ appointment.time_slot }}"> 
                                 Cancel
                             </button>
                         </td>
@@ -49,7 +50,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cancelModalLabel">Cancel Appointment</h5>
+                <h5 class="modal-title" id="cancel-appointment">Cancel Appointment</h5> <!-- JS will overrite -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="POST" id="cancelForm">
