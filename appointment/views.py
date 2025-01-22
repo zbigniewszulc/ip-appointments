@@ -359,8 +359,9 @@ def add_service(request):
             form.save()
             messages.success(request, "Service added successfully.")
         else:
-            messages.error(request, "Error: Invalid form data.")
-        return redirect('get_services')
+            # display any form validation errors on screen
+            messages.error(request, f'Error: {form.errors}')
+        return redirect('add_service')
         
     form = ServiceForm()
     context = {
@@ -387,8 +388,9 @@ def edit_service(request, service_id):
             form.save()
             messages.success(request, "Service updated successfully.")
         else:
-            messages.error(request, "Error: Invalid form data.")
-        return redirect('get_services')
+            # display any form validation errors on screen
+            messages.error(request, f'Error: {form.errors}')
+        return redirect('edit_service', service_id)
     
     form = ServiceForm(instance=service)
     context = {
@@ -417,4 +419,3 @@ def delete_service(request, service_id):
         messages.error(request, "Error: We could not delete the service")
 
     return redirect('get_services')
-  
