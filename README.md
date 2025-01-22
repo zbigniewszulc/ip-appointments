@@ -63,9 +63,9 @@ The navigation bar includes links to the Home Page, Login, and Register.
 
 * Password reset functionality:
 
-![passwd-reset](static/documentation/images/pass-reset.png)
+<p align="center"><img src="static/documentation/images/pass-reset.png" alt="passwd-reset"></p>
 
-6. **Customer Login**  
+1. **Customer Login**  
 **Landing Page** – The calendar, showing available dates and timeslots, is displayed. The customer's username is also shown in the navigation bar for confirmation. The current day is highlighted in yellow, and unavailable slots are greyed out. A warning message will appear if a time slot selected is in the past.
 The customer can navigate through dates using the arrow buttons. Upon clicking on a desired timeslot, a popup window will appear confirming the date and time, along with a dropdown list of available services, also referred to as treatments. Once the customer confirms the booking, a small green box with an acknowledgment will appear in the bottom right corner of the page.  
 
@@ -96,9 +96,141 @@ The navigation bar includes the following links:
 8. **Email**  
 Email Confirmation Functionality – The platform also features email confirmation, ensuring key actions, such as account verification, reservations, and updates to those reservations.
 
-![email-verified](static/documentation/images/email-verified.png)
+<p align="center"><img src="static/documentation/images/email-verified.png" alt="email-verified"></p>
 
-9. **Push notifications**  
+1. **Push notifications**  
 The platform uses Bootstrap Toasts for push notifications, offering a modern and effective method to deliver real-time updates to users. These notifications are displayed as compact, dismissible pop-ups, in the bottom-right corner of the screen, ensuring they are noticeable while remaining unobtrusive to the user’s workflow.  
 
 <p align="center"><img src="static/documentation/images/toast.jpeg" alt="toast"></p>
+
+## Data Model 
+
+
+## Testing
+
+### Validator Testing
+* HTML
+  * There were three errors returned when passing through the official [ W3C validator](https://validator.w3.org/)
+
+![alt text](static/documentation/images/html-errors.png)
+
+**All errors have been fixed:**
+
+![alt text](static/documentation/images/html-errors.png)
+
+* CSS
+  * No errors were found when passing through the official [W3C validator](https://jigsaw.w3.org/css-validator/)
+
+![alt text](static/documentation/images/css-no-errors.png)
+
+* JavaScripy
+  * appointment.js - No errors found
+
+ ![alt text](static/documentation/images/appointments-no-errors.png)
+
+ * cancel_appointment.js - No errors found
+
+![alt text](static/documentation/images/cancel-appointment.png)
+
+* toast.js - No errors found
+
+![alt text](static/documentation/images/toast-js.png)
+
+* Python (I have used Code Instittue recommended [CI PythonLinter](https://pep8ci.herokuapp.com))
+  * **Appointment app**
+    * forms.py - 3 errors found. All have been fixed
+
+![alt text](static/documentation/images/foms-errors.png)
+    * views.py  - 52 errors found. All have been fixed.
+
+![alt text](static/documentation/images/appointment-views-errors.png)
+  * models.py  - 18th errors found. All have been fixed.
+![alt text](static/documentation/images/models-errors.png)
+  * **Patient app**
+    * models.py - 3 errors found. All have been fixed
+
+![alt text](static/documentation/images/patient-models-erros.png)
+    * views.py - 46 errors found. All have been fixed
+
+![alt text](static/documentation/images/patient-views-errors.png)
+
+**I have scanned all Python files in the project using the CI Python Linter. No errors were detected except for the issues mentioned above, which have since been resolved.**
+
+### Manual Testing
+
+
+### Unfixed Bugs
+
+### Deployment
+
+## Credits
+https://dbdiagram.io/d/Appointments-669307ca9939893daedb11c8
+https://docs.djangoproject.com/en/5.0/topics/db/queries/
+https://docs.djangoproject.com/en/5.0/topics/db/queries/#lookups-that-span-relationships
+https://docs.djangoproject.com/en/5.0/ref/forms/widgets/
+https://medium.com/@altafkhan_24475/part-7-built-in-widgets-in-django-form-2d15fdef8e5e
+https://docs.allauth.org/en/latest/account/forms.html
+https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
+https://gavinwiener.medium.com/modifying-django-allauth-forms-6eb19e77ef56
+https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/
+https://simpleisbetterthancomplex.com/tutorial/2018/11/28/advanced-form-rendering-with-django-crispy-forms.html
+https://docs.allauth.org/en/latest/account/forms.html#signup
+https://docs.djangoproject.com/en/5.0/topics/forms/
+https://docs.djangoproject.com/en/5.0/ref/forms/validation/
+https://docs.bird.com/connectivity-platform/how-to-guides/how-to-create-complex-regular-expressions-regex-conditions
+https://docs.djangoproject.com/en/5.0/ref/contrib/messages/
+https://testdriven.io/tips/9329fe4a-605d-4c73-b254-d79542925b81/
+https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
+https://medium.com/django-unleashed/configuring-smtp-server-in-django-a-comprehensive-guide-91810a2bca3f
+https://www.twilio.com/docs/sendgrid/for-developers/sending-email/django#twilio-docs-content-area
+https://docs.djangoproject.com/en/5.0/topics/email/
+https://www.squash.io/how-to-use-settimeout-for-delaying-jquery-actions/
+https://docs.djangoproject.com/en/1.8/ref/contrib/sites/
+https://medium.com/@princesamuelpks/mastering-djangos-secret-weapon-context-processors-unveiled-f0c2e7ea8f43
+https://docs.djangoproject.com/en/5.0/ref/contrib/sites/
+https://docs.allauth.org/en/latest/account/configuration.html
+https://docs.allauth.org/en/latest/account/signals.html
+https://docs.djangoproject.com/en/5.0/topics/signals/
+https://medium.com/jungletronics/how-django-signals-work-81dc30d0dad5
+https://www.sitepoint.com/understanding-signals-in-django/
+https://dev.to/yokwejuste/django-signals-mastery-144d
+https://www.guvi.in/blog/guide-for-django-signals-and-their-uses/
+https://docs.djangoproject.com/en/5.0/topics/i18n/timezones/
+https://docs.python.org/3.12/library/calendar.html
+https://docs.djangoproject.com/en/5.0/topics/db/models/
+https://docs.djangoproject.com/en/5.0/ref/models/querysets/
+https://docs.djangoproject.com/en/5.0/ref/models/querysets/#values-list
+https://docs.python.org/3.12/library/datetime.html#strftime-strptime-behavior
+https://docs.djangoproject.com/en/5.0/ref/request-response/#jsonresponse-objects
+https://www.w3schools.com/python/ref_string_endswith.asp
+https://toolstud.io/web/charmap.php
+https://docs.djangoproject.com/en/5.0/ref/templates/builtins/
+https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html
+https://docs.python.org/3.12/library/exceptions.html
+https://docs.djangoproject.com/en/5.0/ref/exceptions/
+https://dev.to/kuba_szw/django-logging-forget-about-print-when-debugging-3g11
+https://www.w3schools.com/css/tryit.asp?filename=trycss_form_button
+https://docs.djangoproject.com/en/5.0/topics/auth/default/
+https://docs.python.org/3.12/library/datetime.html#strftime-and-strptime-behavior
+https://docs.djangoproject.com/en/1.10/topics/logging/#topic-logging-parts-loggers
+https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#ref-templates-builtins-tags
+https://docs.python.org/3.12/library/datetime.html#module-datetime
+https://www.freecodecamp.org/news/python-for-loop-for-i-in-range-example/
+https://docs.djangoproject.com/en/5.0/topics/http/urls/ -> converters
+https://tech.raturi.in/designing-django-urls-best-practices
+https://medium.com/jungletronics/how-django-signals-work-81dc30d0dad5
+https://docs.djangoproject.com/en/5.0/ref/models/class/
+https://docs.djangoproject.com/en/5.0/topics/testing/
+https://docs.djangoproject.com/en/5.0/topics/testing/tools/
+https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll
+https://www.freecodecamp.org/news/how-to-loop-through-an-array-in-javascript-js-iterate-tutorial/
+https://www.w3schools.com/js/js_string_templates.asp
+https://www.w3schools.com/jsref/met_document_queryselectorall.asp
+https://www.w3schools.com/jsref/met_document_queryselector.asp
+https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+https://docs.djangoproject.com/en/5.1/ref/templates/builtins/ 
+https://docs.djangoproject.com/en/5.1/topics/i18n/timezones/
+https://docs.djangoproject.com/en/5.0/topics/http/shortcuts/
+https://stackoverflow.com/questions/63511542/modelform-crispy-formhelper-and-choices-list-datepicker-not-showing
+https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
+https://www.geeksforgeeks.org/django-convert-form-errors-to-python-dictionary/
