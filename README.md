@@ -28,12 +28,10 @@ To the Home Page, Dental Services, and Logout for the administrator, also called
 ![navbar2](static/documentation/images/navbar3.png)
 
 * On mobile devices:
-<div style="text-align: center;">
-    <img src="static/documentation/images/navbar-mobile.png" height="200" alt="navbar-mobile">
-</div>
 
+<img style="display:block;margin:auto;height:150" src="static/documentation/images/navbar-mobile.png" alt="navbar-mobile">
 
-2. **The Footer**  
+1. **The Footer**  
 The footer bar appears on all pages, allowing user to easily access the clinic's Facebook page, make a phone call through WhatsApp, or view the opening hours.
 
 ![footer](static/documentation/images/footer.png)
@@ -103,6 +101,4 @@ Email Confirmation Functionality – The platform also features email confirmati
 9. **Push notifications**  
 The platform uses Bootstrap Toasts for push notifications, offering a modern and effective method to deliver real-time updates to users. These notifications are displayed as compact, dismissible pop-ups, in the bottom-right corner of the screen, ensuring they are noticeable while remaining unobtrusive to the user’s workflow.  
 
-<div style="text-align: center;">
-    <img src="static/documentation/images/toast.jpeg" height="100" alt="navbar-mobile">
-</div>
+<img style="display:block;margin:auto;height:100" src="static/documentation/images/toast.jpeg" alt="toast">
