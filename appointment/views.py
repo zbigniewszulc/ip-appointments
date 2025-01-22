@@ -330,7 +330,7 @@ def get_services(request):
     The services are ordered alphabetically by name.
 
     Args:
-        request (HttpRequest): The HTTP request object 
+        request (HttpRequest): The HTTP request object
 
     Returns:
         HttpResponse: Renders the 'services.html' template with services data
@@ -362,7 +362,7 @@ def add_service(request):
             # display any form validation errors on screen
             messages.error(request, f'Error: {form.errors}')
         return redirect('add_service')
-        
+
     form = ServiceForm()
     context = {
         'form': form
@@ -377,6 +377,7 @@ def edit_service(request, service_id):
 
     Args:
         request (HttpRequest): The HTTP request object containing the form data
+        service_id (int): The ID of the service to be edited
 
     Returns:
         HttpResponse: Redirects to the service list page
@@ -391,7 +392,7 @@ def edit_service(request, service_id):
             # display any form validation errors on screen
             messages.error(request, f'Error: {form.errors}')
         return redirect('edit_service', service_id)
-    
+
     form = ServiceForm(instance=service)
     context = {
         'form': form
@@ -407,6 +408,7 @@ def delete_service(request, service_id):
 
     Args:
         request (HttpRequest): The HTTP request object containing the form data
+        service_id (int): The ID of the service to be edited
 
     Returns:
         HttpResponse: Redirects to the service list page
