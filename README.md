@@ -2,6 +2,7 @@
 The Infinita Perfectio Booking Platform was designed as an add-on to an existing website for a Polish dental clinic, with the aim of encouraging clients to book dental treatments online. Potential clients can review available times and dates and proceed with booking their desired treatment.
 To access the booking platform, the customer will be prompted to log in or register first. Upon registration, the customer will be able to book treatments, cancel existing bookings, and amend their personal details provided during registration. The administrator will have the option to create, amend, and delete appointment listings as well as manage the offered treatments, which are also referred to as services interchangeably. The system includes several features to prevent typical errors. For example, a warning message will appear if a client selects a timeslot in the past. Timeslots that have already been booked are grayed out and not accessible. Additionally, confirmation emails are sent to notify clients of appointment changes, such as cancellations, and verification emails.
 
+![alt text](static/documentation/images/mockup.png)
 
 * Link to the hosted project: **[Infinita Perfectio Booking Platform](https://ip-appointments-94bebae716d1.herokuapp.com)**
 
@@ -105,6 +106,19 @@ The platform uses Bootstrap Toasts for push notifications, offering a modern and
 
 ## Data Model 
 
+## The Skeleton Plane
+
+* Landing Page
+
+![alt text](static/documentation/images/des-landing-page.png)
+
+* Landing Page For Logged In User
+
+![alt text](static/documentation/images/des-patient-logged-in.png)
+
+* Landing Page For Logged In Administrator
+
+![alt text](static/documentation/images/des-admin-logged-in.png)
 
 ## Testing
 
@@ -160,6 +174,7 @@ The platform uses Bootstrap Toasts for push notifications, offering a modern and
 
 
 ### Unfixed Bugs
+* I came across few bugs in this porject but they all were tacket and none left
 
 ### Deployment
 
