@@ -104,7 +104,132 @@ The platform uses Bootstrap Toasts for push notifications, offering a modern and
 
 <p align="center"><img src="static/documentation/images/toast.jpeg" alt="toast"></p>
 
-## Data Model 
+## User Sories:
+
+### User Story: Patient Registration
+
+**As a new patient, I can register for an account so that I can book dental appointments online.**
+
+### Acceptance Criteria
+
+- **AC1**: Patient can access the registration page from the navigation bar.  
+- **AC2**: Patient must provide required details:  
+  - Name  
+  - Surname  
+  - Date of Birth  
+  - Email  
+  - Password  
+  - Address  
+  - Phone Number  
+- **AC3**: Patient receives a confirmation email upon successful registration.
+---
+### User Story: Patient Login
+
+**As a registered patient, I can log in to my account so that I can manage my appointments.**
+
+### Acceptance Criteria
+
+- **AC1**: Patient can access the login page from the navigation bar.  
+- **AC2**: Patient must provide their username and password to log in.  
+- **AC3**: Patient sees an error message if login credentials are incorrect.  
+- **AC4**: In case of a forgotten password, the patient must have the option to reset it.
+---
+### User Story: View Calendar
+
+**As a logged-in patient, I can view a calendar with available time slots so that I can select a time for my dental appointment.**
+
+### Acceptance Criteria
+
+- **AC1**: The calendar displays the current week with available time slots.  
+- **AC2**: Booked time slots are greyed out.  
+- **AC3**: The current date is clearly highlighted.
+---
+
+### User Story: Book Appointment
+
+**As a logged-in patient, I can book an available time slot so that I can schedule a dental appointment.**
+
+### Acceptance Criteria
+
+- **AC1**: Patient can select an available time slot, triggering a modal asking for confirmation.  
+- **AC2**: Patient can confirm or cancel the booking from the modal.  
+- **AC3**: Patient cannot book the appointments from the past.  
+- **AC4**: Only one visit allowed per reservation. No double bookings accepted.
+---
+
+### User Story: Cancel Appointment
+
+**As a logged-in patient, I can cancel a booked appointment so that I can free up the date.**
+
+### Acceptance Criteria
+
+- **AC1**: Patient can view their booked appointments under the "My Appointments" section.  
+- **AC2**: Patient can cancel an appointment, triggering a confirmation modal.  
+- **AC3**: Patient receives a confirmation email upon successful cancellation.
+---
+
+### User Story: View Personal Details
+
+**As a patient, I can view my personal details so that I can keep my information up-to-date.**
+
+### Acceptance Criteria
+
+- **AC1**: Patient can view their username, first name, last name, email, phone number, address, and date of birth.  
+- **AC2**: The information should be presented in a user-friendly layout with a button to edit patient details on the same page.
+---
+
+### User Story: Edit Personal Details
+
+**As a user, I can edit my personal details so that I can keep my details up-to-date.**
+
+### Acceptance Criteria
+
+- **AC1**: User can edit their first name, last name, email, phone number, address, and date of birth.  
+- **AC2**: Username is not allowed to be changed.  
+- **AC3**: A success message should show up following a submission, and the updated details should be stored in the database.
+---
+
+### User Story: Add or remove Dental Services
+
+**As a superuser, I can add or remove dental services so that the list of services offered is up-to-date.**
+
+### Acceptance Criteria
+
+- **AC1**: Superuser can manage services through the admin site.  
+- **AC2**: Added new services should appear in the booking form on the front end.  
+- **AC3**: Removed services should no longer appear in the booking form on the front end.
+---
+
+### User Story: Dental Services menu option for superuser
+
+**As a superuser/administrator, I can display a list of all available dental services so that I can manage the clinic's service offerings.**
+
+### Acceptance Criteria
+
+- **AC1**: An option labeled "Dental Services" should be visible in the navigation menu for administrators/superusers.  
+- **AC2**: Clicking the "Dental Services" option should display a full list of all services.  
+- **AC3**: Only administrators and superusers who are logged in should be able to see the "Dental Services" menu item.
+---
+
+### User Story: Superuser Manage Dental Services
+
+**As a superuser/administrator, I can manage dental services on the front end so that the offered options for booking are up to date and easier to manage.**
+
+### Acceptance Criteria
+
+- **AC1**: **Create New Service** - The superuser/administrator can add new dental services with details like the name of the offered service. It should be available for booking once created.  
+- **AC2**: **Update Existing Service** - The superuser/administrator can edit the details of existing dental services.  
+- **AC3**: **Delete Existing Service** - The superuser/administrator can remove services that are no longer offered. The deleted service should not be available as a dropdown option on the calendar page. Also, deleted services should cascade and delete all booked appointments connected with the deleted service.
+
+## Data Model
+
+The data model behind the Infinita Perfectio Booking Platform is designed to handle the core functionalities of managing users, appointments, and treatments. It includes several key components that work together to ensure smooth operations for both patients and administrators.
+
+- **User Model:** This model manages the details of both patients and administrators, including their personal information and login credentials. It also defines user roles, helping to differentiate the permissions for patients and administrators.
+- **Appointment Model:** This model stores all the information about the booked appointments, such as the time, date, patient and selected treatment.
+- **Service Model:** Here, we store the details of the dental treatments offered by the clinic. Each service is described simply by the name.
+
+Overall, this structure supports efficient data management, making the booking process seamless for patients while giving administrators the flexibility to update services and manage appointments effectively.
 * ER Diagram
 
 ![alt text](static/documentation/images/ERDiagram.png)
@@ -226,11 +351,58 @@ The Infinita Perfectio Booking Platform was thoroughly tested to ensure all its 
 
 Overall, the testing process confirmed that all features are functioning as intended, with no unresolved issues or bugs.  
 
+### Automated Testing  
+
+* I conducted automated testing for Python in my Django project using built-in Unit Tests. All created automated tests passed successfully
+
+![alt text](static/documentation/images/unit-test1.png)
+
+
+* Snippet of appointment bookin form testing 
+
+![alt text](static/documentation/images/unit-test-forms.png)
+
+* Snippet of calendar view testing 
+
+![alt text](static/documentation/images/unit-test-cal-view.png)
 
 ### Unfixed Bugs
 * I encountered a few bugs in this project, but all of them were addressed and resolved, leaving no issues remaining.
 
+
+### Accessibility Evaluation
+
+Aaccessibility testing was performed using the [Wave](https://wave.webaim.org) website - evaluation tool:
+  * No errors were found 
+![accessibility](static/documentation/images/wave-accessibility.png)
+
+### Lightouse testing
+  * Automated tool used to improve the quality of web pages. It provides a comprehensive audit of a website’s performance, accessibility, best practices 
+  
+![lighthouse](static/documentation/images/lighthouse.png)
+
 ### Deployment
+
+## Deployment
+
+Follow these steps for a seamless deployment of your application on Heroku.
+
+1. **Log in to Heroku**: Head over to the [Heroku Dashboard](https://dashboard.heroku.com/) and log in using your credentials.
+   
+![dashboard](static/documentation/images/heroku1.png)
+
+2. **Create a New Heroku App**: Click on the "New" button, then choose "Create new app". Provide a unique name for your app, and Heroku will generate a URL to access it.
+   
+3. **Set Environment Variables**: Go to the settings page of your app on the Heroku dashboard. In the "Config Vars" section, you can define key-value pairs for your environment variables like API keys or database connection URLs. You might need to click Reveal Config Vars to review and set enviroemtnal variables
+   
+![envvar](static/documentation/images/heroku2.png)
+
+4. **Deploy Your App**: Under the "Deploy" tab of your Heroku app, you'll have several options to deploy manually or link your app to a GitHub repository for automated deployments. Select the method that aligns with your workflow. If you choose automatic deployment, configure it to deploy your app every time there are changes in the linked GitHub repository.
+   
+![alt text](static/documentation/images/heroku3.png)
+
+![alt text](static/documentation/images/heroku4.png)
+
 
 ## Credits
 https://dbdiagram.io/d/Appointments-669307ca9939893daedb11c8
@@ -303,3 +475,7 @@ https://docs.djangoproject.com/en/5.0/topics/http/shortcuts/
 https://stackoverflow.com/questions/63511542/modelform-crispy-formhelper-and-choices-list-datepicker-not-showing
 https://docs.djangoproject.com/en/5.0/topics/forms/modelforms/
 https://www.geeksforgeeks.org/django-convert-form-errors-to-python-dictionary/
+
+Throughout this project, I relied on a wide range of resources that enabled me to achieve my goals and ensure the application functioned as intended. The foundation of my work was the Code Institute training materials, which provided invaluable knowledge and guidance at every stage of development.
+I also utilized ChatGPT, which was incredibly helpful in clarifying complex concepts and deepening my understanding of coding principles. This support allowed me to effectively address challenges and enhance my problem-solving skills.
+I am sincerely grateful for all the tools, documentation, and support that contributed to the successful completion of this project. A special thanks goes to the team at Code Institute, whose dedication and expertise played a vital role in my learning journey.
