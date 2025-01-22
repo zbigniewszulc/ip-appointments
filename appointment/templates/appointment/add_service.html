@@ -12,6 +12,10 @@
           {{ form|crispy }}
           <button type="submit" class="btn btn-primary">Add Service</button>
         </form>
+        <a href="{% url 'get_services' %}" class="btn btn-sm btn-outline-secondary fw-bold mt-5">
+          <i class="fa-solid fa-circle-left"></i> 
+          Return 
+        </a>
       </div>
     </div>
   </div>
