@@ -105,6 +105,9 @@ The platform uses Bootstrap Toasts for push notifications, offering a modern and
 <p align="center"><img src="static/documentation/images/toast.jpeg" alt="toast"></p>
 
 ## Data Model 
+* ER Diagram
+
+![alt text](static/documentation/images/ERDiagram.png)
 
 ## The Skeleton Plane
 
@@ -170,11 +173,62 @@ The platform uses Bootstrap Toasts for push notifications, offering a modern and
 
 **I have scanned all Python files in the project using the CI Python Linter. No errors were detected except for the issues mentioned above, which have since been resolved.**
 
-### Manual Testing
+### Manual Testing  
+
+The Infinita Perfectio Booking Platform was thoroughly tested to ensure all its features work correctly across various scenarios. The testing process included the following steps:  
+
+## Navigation Bar  
+* Checked that the navigation bar links (Home, Login, Register, My Appointments, etc.) direct users to the correct pages based on their login status (guest, customer, or administrator).  
+* Tested the navigation bar’s responsiveness on different screen sizes, including desktops, tablets, and mobile devices.  
+
+## Calendar Page  
+* Verified that users can only select future timeslots and that attempts to select past timeslots trigger a warning message.  
+* Confirmed that unavailable timeslots are grayed out and cannot be selected.  
+* Tested the calendar navigation buttons to ensure smooth functionality when moving between weeks or returning to the current week.  
+
+## Registration and Login  
+* Ensured that required fields on the registration page are validated and display error messages if left blank.  
+* Tested the email verification process to ensure users cannot log in without confirming their accounts.  
+* Checked that unsuccessful login attempts produce appropriate error messages and successful logins display confirmation messages.  
+
+## Booking Process  
+* Verified that users can book appointments by selecting a date, time, and service.  
+* Tested the confirmation popup to ensure it provides accurate details before finalizing the booking.  
+* Confirmed that successfully booked appointments appear correctly in the "My Appointments" section.  
+
+### Customer Account  
+* Checked the functionality of the "My Details" page, ensuring customers can view and update their information without issues.  
+* Verified that customers can view and cancel appointments in the "My Appointments" section, with confirmation prompts appearing as expected.  
+
+### Administrator Features  
+* Tested the "Dental Services" page to ensure administrators can create, update, and delete services.  
+* Verified that any changes made by the administrator are reflected immediately in the calendar.  
+* Confirmed that administrators can view the calendar and log out successfully but cannot book appointments themselves.  
+
+## Responsive Design  
+* Ensured the platform’s layout and features work seamlessly on various devices, including desktops, tablets, and smartphones.  
+* Checked the usability of all elements, such as navigation bars, forms, and buttons, on smaller screens.  
+
+## Notifications  
+* Tested Bootstrap Toast notifications to confirm they display correctly for actions like logging in, booking, and canceling appointments.  
+* Verified that the notifications are user-friendly, dismissible, and visible across different devices.  
+
+## Error Handling  
+* Simulated user errors such as invalid login credentials, blank registration fields, and selecting past timeslots. Verified that the system responds with clear error messages.  
+* Tested inputs such as invalid email formats and weak passwords to confirm proper validation.  
+
+### Cross-Browser Compatibility  
+* Tested the platform on multiple browsers, including Chrome, Firefox, Edge, and Safari, to ensure consistent functionality and appearance.  
+
+## Email Notifications  
+* Verified that email notifications for account verification, booking confirmation, and cancellations are sent to the user’s registered email address.  
+* Ensured that the email content is clear and accurate, containing all the necessary information.  
+
+Overall, the testing process confirmed that all features are functioning as intended, with no unresolved issues or bugs.  
 
 
 ### Unfixed Bugs
-* I came across few bugs in this porject but they all were tacket and none left
+* I encountered a few bugs in this project, but all of them were addressed and resolved, leaving no issues remaining.
 
 ### Deployment
 
